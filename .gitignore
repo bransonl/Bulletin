@@ -1,0 +1,11 @@
+# database data
+database/
+
+# node modules
+**/node_modules/
+
+# pyc files
+**/*.py[cod]
+
+# env file
+.env
