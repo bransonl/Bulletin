@@ -1,0 +1,8 @@
+SQLAlchemy
+Flask
+Flask-SQLAlchemy
+Flask-Script
+Flask-Migrate
+flask-restful
+marshmallow
+psycopg2
