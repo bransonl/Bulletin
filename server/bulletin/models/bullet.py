@@ -8,7 +8,9 @@ class BulletType(enum.Enum):
   bullet = 'bullet'
 
 
-class Bullet(db.Model):
+class BulletModel(db.Model):
+  __tablename__ = 'bullet'
+
   id = db.Column(db.Integer, primary_key=True)
   board_id = db.Column(db.Integer, db.ForeignKey('board.id'), nullable=False)
   parent_id = db.Column(db.Integer, nullable=True)
@@ -22,4 +24,3 @@ class Bullet(db.Model):
     server_default=db.func.now())
   updated_on = db.Column(db.DateTime, nullable=False,
     server_default=db.func.now(), server_onupdate=db.func.now())
-

@@ -9,7 +9,9 @@ class RoleType(enum.Enum):
   viewer      = 'viewer'
 
 
-class Membership(db.Model):
+class MembershipModel(db.Model):
+  __tablename__ = 'membership'
+
   board_id = db.Column(db.Integer, db.ForeignKey('board.id'), primary_key=True)
   user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
   role_id = db.Column(db.Enum(RoleType), nullable=False)
