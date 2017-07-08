@@ -1,7 +1,7 @@
 __all__ = [
-  'auth',
-  'user',
-  'board',
-  'membership',
-  'bullet'
+    'auth',
+    'user',
+    'board',
+    'membership',
+    'bullet'
 ]
