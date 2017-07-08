@@ -20,7 +20,7 @@ class BulletModel(db.Model):
   label = db.Column(db.String(80), nullable=False)
   description = db.Column(db.Text, nullable=True)
   value = db.Column(db.Integer, nullable=False)
-  created_on = db.Column(db.DateTime, nullable=False,
+  created_at = db.Column(db.DateTime, nullable=False,
     server_default=db.func.now())
-  updated_on = db.Column(db.DateTime, nullable=False,
+  updated_at = db.Column(db.DateTime, nullable=False,
     server_default=db.func.now(), server_onupdate=db.func.now())
