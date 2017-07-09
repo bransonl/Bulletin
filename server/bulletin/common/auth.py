@@ -1,7 +1,7 @@
 from flask import request
 from functools import wraps
 
-from bulletin.shared import errors
+from bulletin.common import errors
 from bulletin.models.user import UserModel
 from bulletin.libs import jwttoken
 
