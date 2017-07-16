@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 4b08c2c0a817
+Revision ID: 225bc2cea109
 Revises: 
-Create Date: 2017-07-04 16:23:43.860375
+Create Date: 2017-07-15 18:05:16.946397
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4b08c2c0a817'
+revision = '225bc2cea109'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,17 +23,16 @@ def upgrade():
     sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('privacy', sa.Enum('private', 'secret', 'public', name='privacytype'), nullable=False),
-    sa.Column('created', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('user',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=80), nullable=False),
-    sa.Column('password', sa.String(length=80), nullable=False),
-    sa.Column('salt', sa.String(length=80), nullable=False),
-    sa.Column('created', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('username', sa.String(length=30), nullable=False),
+    sa.Column('password', sa.Text(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('username')
     )
@@ -46,18 +45,18 @@ def upgrade():
     sa.Column('bullet_type', sa.Enum('group', 'bullet', name='bullettype'), nullable=False),
     sa.Column('label', sa.String(length=80), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
-    sa.Column('value', sa.Integer(), nullable=False),
-    sa.Column('created_on', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_on', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('value', sa.Integer(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.ForeignKeyConstraint(['board_id'], ['board.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('membership',
     sa.Column('board_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('role_id', sa.Enum('admin', 'contributor', 'viewer', name='roletype'), nullable=False),
-    sa.Column('created', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('role', sa.Enum('admin', 'contributor', 'viewer', name='roletype'), nullable=False),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.ForeignKeyConstraint(['board_id'], ['board.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('board_id', 'user_id')

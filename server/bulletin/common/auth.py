@@ -6,7 +6,7 @@ from bulletin.models.user import UserModel
 from bulletin.libs import jwttoken
 
 
-def get_auth_user():
+def _get_auth_user():
     authorization = request.headers.get('Authorization')
     if authorization is None:
         return None
@@ -23,7 +23,7 @@ def requires_auth():
     def wrapper(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
-            user = get_auth_user()
+            user = _get_auth_user()
             if user is None:
                 raise errors.Unauthorized()
             kwargs['user'] = user

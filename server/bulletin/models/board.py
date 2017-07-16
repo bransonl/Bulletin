@@ -22,5 +22,5 @@ class BoardModel(db.Model):
                            server_default=db.func.now(),
                            server_onupdate=db.func.now())
 
-    users = db.relationship('Membership', backref='board', lazy=True)
-    bullets = db.relationship('Bullet', backref='board', lazy=True)
+    users = db.relationship('MembershipModel', backref='board', lazy=True)
+    bullets = db.relationship('BulletModel', backref='board', lazy=True)
