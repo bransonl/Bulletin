@@ -11,3 +11,9 @@ class ErrorSchema(Schema):
         return {
             'error': error
         }
+
+
+class MethodNotAllowedSchema(ErrorSchema):
+    allowed_methods = fields.List(fields.Str(),
+                                  required=True,
+                                  dump_to='allowedMethods')

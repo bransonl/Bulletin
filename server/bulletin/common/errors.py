@@ -1,7 +1,7 @@
-from flask import jsonify
+from flask import jsonify, request
 
 from bulletin import app
-from bulletin.schemas.error import ErrorSchema
+from bulletin.schemas.error import ErrorSchema, MethodNotAllowedSchema
 
 
 class StatusCode:
@@ -32,19 +32,20 @@ class ResourceIdName:
     ID = 'id'
 
 
-class Error(Exception):
-    def __init__(self, errors=None):
-        self.errors = errors
+# Base Error class to provide to_json method
 
+class Error(Exception):
     def to_json(self):
         return jsonify(ErrorSchema().dump(self).data)
 
 
+# General Error classes to define code and message
+
 class BadRequest(Error):
     code = StatusCode.BAD_REQUEST
+    message = ErrorMessage.BAD_REQUEST
 
-    def __init__(self, message=ErrorMessage.BAD_REQUEST, errors=None):
-        self.message = message
+    def __init__(self, errors=None):
         self.errors = errors
 
 
@@ -60,6 +61,9 @@ class Forbidden(Error):
     code = StatusCode.FORBIDDEN
     message = ErrorMessage.FORBIDDEN
 
+    def __init__(self, errors=None):
+        self.errors = errors
+
 
 class NotFound(Error):
     code = StatusCode.NOT_FOUND
@@ -67,7 +71,7 @@ class NotFound(Error):
 
     @staticmethod
     def build_message(resource, id_name, resource_id):
-        return '{0} with {1} \'{2}\' not found'\
+        return '{0} with {1} \'{2}\' not found' \
             .format(resource, id_name, resource_id)
 
     @staticmethod
@@ -84,6 +88,14 @@ class MethodNotAllowed(Error):
     code = StatusCode.METHOD_NOT_ALLOWED
     message = ErrorMessage.METHOD_NOT_ALLOWED
 
+    def __init__(self, allowed_methods=None):
+        self.allowed_methods = allowed_methods or []
+
+    def to_json(self):
+        return jsonify(MethodNotAllowedSchema().dump(self).data)
+
+
+# Specialized Error classes
 
 class InvalidData(BadRequest):
     message = ErrorMessage.INVALID_DATA
@@ -115,6 +127,7 @@ class BulletNotFound(NotFound):
         )
 
 
+# Helper method to construct error object to pass into Error classes
 def construct_errors(label, message, existing_errors=None):
     if existing_errors is not None and existing_errors.get(label) is not None:
         new_errors = existing_errors.copy()
@@ -131,8 +144,8 @@ def page_not_found():
 
 
 @app.errorhandler(405)
-def method_not_allowed(_):
-    return MethodNotAllowed().to_json()
+def method_not_allowed(err):
+    return MethodNotAllowed(allowed_methods=err.valid_methods).to_json()
 
 
 @app.errorhandler(Error)

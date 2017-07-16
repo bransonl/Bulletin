@@ -10,9 +10,9 @@ class AuthRequirement:
 
 
 class AuthErrorMessage:
-    USERNAME_TOO_SHORT = 'Username must be at least {0} characters long.'\
+    USERNAME_TOO_SHORT = 'Username must be at least {0} characters long.' \
         .format(AuthRequirement.MIN_USERNAME_LENGTH)
-    PASSWORD_TOO_SHORT = 'Password must be at least {0} characters long.'\
+    PASSWORD_TOO_SHORT = 'Password must be at least {0} characters long.' \
         .format(AuthRequirement.MIN_PASSWORD_LENGTH)
     USERNAME_TAKEN = 'Username is already taken.'
     INCORRECT_PASSWORD = 'No user found with this ' \
