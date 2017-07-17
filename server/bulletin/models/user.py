@@ -1,7 +1,7 @@
 from bulletin import db
 
 
-class UserModel(db.Model):
+class User(db.Model):
     __tablename__ = 'user'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -13,4 +13,4 @@ class UserModel(db.Model):
                            server_default=db.func.now(),
                            server_onupdate=db.func.now())
 
-    boards = db.relationship('MembershipModel', backref='user', lazy=True)
+    boards = db.relationship('Membership', backref='user', lazy=True)

@@ -4,12 +4,13 @@ from bulletin import db
 
 
 class RoleType(enum.Enum):
-    admin = 'admin'
-    contributor = 'contributor'
-    viewer = 'viewer'
+    viewer = 1
+    contributor = 2
+    admin = 3
+    owner = 4
 
 
-class MembershipModel(db.Model):
+class Membership(db.Model):
     __tablename__ = 'membership'
 
     board_id = db.Column(db.Integer, db.ForeignKey('board.id'),

@@ -1,6 +1,6 @@
 from marshmallow import fields, Schema, ValidationError
 
-from bulletin.models.user import UserModel
+from bulletin.models.user import User
 from bulletin.schemas.base import BaseSchema
 
 
@@ -22,7 +22,7 @@ class AuthErrorMessage:
 def _validate_username(username):
     if username is None or len(username) < AuthRequirement.MIN_USERNAME_LENGTH:
         raise ValidationError(AuthErrorMessage.USERNAME_TOO_SHORT)
-    existing_user = UserModel.query.filter_by(username=username).first()
+    existing_user = User.query.filter_by(username=username).first()
     if existing_user is not None:
         raise ValidationError(AuthErrorMessage.USERNAME_TAKEN)
     return True

@@ -8,7 +8,7 @@ class BulletType(enum.Enum):
     bullet = 'bullet'
 
 
-class BulletModel(db.Model):
+class Bullet(db.Model):
     __tablename__ = 'bullet'
 
     id = db.Column(db.Integer, primary_key=True)

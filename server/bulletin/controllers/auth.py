@@ -8,7 +8,7 @@ from bulletin.common import errors, validation
 from bulletin.libs import jwttoken
 from bulletin.schemas.auth import AccessTokenSchema, AuthErrorMessage, \
     LoginSchema, PasswordSchema, SignupSchema, UsernameSchema
-from bulletin.models.user import UserModel
+from bulletin.models.user import User
 
 
 def _encode_password(password):
@@ -33,7 +33,7 @@ def validate_password(data):
 @validation.unwrap_data(LoginSchema)
 def login(data):
     username, password = data.get('username'), data.get('password')
-    user = UserModel.query.filter_by(username=username).first()
+    user = User.query.filter_by(username=username).first()
 
     if user is None or not bcrypt.checkpw(_encode_password(password),
                                           user.password.encode('utf-8')):
@@ -52,7 +52,7 @@ def login(data):
 def signup(data):
     username, password = data.get('username'), data.get('password')
     hashed = bcrypt.hashpw(_encode_password(password), bcrypt.gensalt())
-    user = UserModel(username=username, password=hashed.decode('utf-8'))
+    user = User(username=username, password=hashed.decode('utf-8'))
     db.session.add(user)
     db.session.commit()
     return AccessTokenSchema(wrap=True).to_json({

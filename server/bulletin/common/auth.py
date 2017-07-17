@@ -2,7 +2,7 @@ from flask import request
 from functools import wraps
 
 from bulletin.common import errors
-from bulletin.models.user import UserModel
+from bulletin.models.user import User
 from bulletin.libs import jwttoken
 
 
@@ -15,7 +15,7 @@ def _get_auth_user():
     token = jwttoken.decode(authorization[len('Bearer '):])
     if token is None or token.get('sub') is None:
         return None
-    user = UserModel.query.get(token.get('sub'))
+    user = User.query.get(token.get('sub'))
     return user
 
 
