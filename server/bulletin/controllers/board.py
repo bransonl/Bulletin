@@ -1,5 +1,7 @@
 from bulletin import app, db
-from bulletin.common import auth, errors, validation
+from bulletin.common import auth, validation
+from bulletin.errors import base
+from bulletin.errors.board import BoardNotFound
 from bulletin.models.board import Board
 from bulletin.models.membership import Membership, RoleType
 from bulletin.schemas.base import BaseSchema
@@ -41,7 +43,7 @@ def create_board(user, data):
 def modify_board(board_id, user, data):
     board = Board.query.get(board_id)
     if board is None:
-        raise errors.BoardNotFound(board_id)
+        raise BoardNotFound(board_id)
     board.name = data.get('name') or board.name
     board.description = data.get('description') or board.description
     board.privacy = data.get('privacy') or board.privacy
@@ -62,12 +64,12 @@ def modify_board(board_id, user, data):
 def delete_board(board_id, user):
     board = db.session.query(Board)
     if board is None:
-        raise errors.BoardNotFound(board_id)
+        raise BoardNotFound(board_id)
 
     membership = Membership.query \
         .filter_by(board_id=board.id, user_id=user.id)
     if membership.role is not RoleType.admin:
-        raise errors.Forbidden(errors=errors.construct_errors(
+        raise base.Forbidden(errors=base.construct_errors(
             'role', MembershipErrorMessage.INSUFFICIENT_PRIVILEGES
         ))
 
