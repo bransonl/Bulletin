@@ -48,7 +48,7 @@ class BadRequest(Error):
     message = ErrorMessage.BAD_REQUEST
 
     def __init__(self, errors=None):
-        self.errors = errors
+        self.errors = errors or []
 
 
 class Unauthorized(Error):
@@ -56,7 +56,7 @@ class Unauthorized(Error):
     message = ErrorMessage.UNAUTHORIZED
 
     def __init__(self, errors=None):
-        self.errors = errors
+        self.errors = errors or []
 
 
 class Forbidden(Error):
@@ -64,7 +64,7 @@ class Forbidden(Error):
     message = ErrorMessage.FORBIDDEN
 
     def __init__(self, errors=None):
-        self.errors = errors
+        self.errors = errors or []
 
 
 class NotFound(Error):
@@ -83,7 +83,7 @@ class NotFound(Error):
         }
 
     def __init__(self, errors=None):
-        self.errors = errors
+        self.errors = errors or []
 
 
 class MethodNotAllowed(Error):
@@ -102,7 +102,7 @@ class InternalServer(Error):
     message = ErrorMessage.INTERNAL_SERVER
 
     def __init__(self, errors=None):
-        self.errors = errors
+        self.errors = errors or []
 
 
 # Helper method to construct error object to pass into Error classes

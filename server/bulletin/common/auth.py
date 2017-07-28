@@ -2,13 +2,13 @@ from functools import wraps
 
 from flask import request
 
-from bulletin import db
 from bulletin.libs import jwttoken
 
 from bulletin.errors.base import Forbidden, Unauthorized
 from bulletin.errors.board import BoardNotFound
+from bulletin.errors.bullet import OrphanedBullet
 
-from bulletin.models.board import Board, PrivacyType
+from bulletin.models.board import PrivacyType
 from bulletin.models.membership import Membership
 from bulletin.models.user import User
 from bulletin.schemas.membership import MembershipErrorMessage
@@ -27,9 +27,10 @@ def _get_authenticated_user():
     return user
 
 
-def _has_enough_privileges(user_id, board_id, role):
+def _has_enough_privileges(user_id, board, role):
     membership = Membership.query \
-        .filter_by(user_id=user_id, board_id=board_id)
+        .filter_by(user_id=user_id, board_id=board.id)\
+        .first()
     if membership is None:
         return False
     elif membership.role < role:
@@ -37,25 +38,27 @@ def _has_enough_privileges(user_id, board_id, role):
     return True
 
 
-def _get_board(user_id, board_id):
-    board, membership = db.session.query(Board, Membership) \
-        .outerjoin(Membership, Board.id == Membership.board_id) \
-        .filter(Board.id == board_id) \
+def _verify_board_access(user_id, board):
+    membership = Membership.query \
+        .filter(Membership.board_id == board.id) \
         .filter(Membership.user_id == user_id) \
         .first()
-    # board not found
-    if board is None:
-        raise BoardNotFound(board_id)
     # board secret and no membership
-    elif board.privacy is PrivacyType.secret and membership is None:
-        raise BoardNotFound(board_id)
+    if board.privacy is PrivacyType.secret and membership is None:
+        raise BoardNotFound(board.id)
     # board private and no membership
     elif board.privacy is PrivacyType.private and membership is None:
-        return None
-    return board
+        raise MembershipErrorMessage.NO_BOARD_ACCESS
 
 
-def requires_auth():
+def _verify_bullet_access(user_id, bullet):
+    board = bullet.board
+    if board is None:
+        raise OrphanedBullet(bullet.id)
+    _verify_board_access(user_id, board)
+
+
+def requires_authentication():
     def wrapper(f):
         @wraps(f)
         def wrapped(*args, **kwargs):
@@ -71,15 +74,12 @@ def requires_auth():
 def requires_minimum_role(role):
     def wrapper(f):
         @wraps(f)
-        def wrapped(board_id, *args, **kwargs):
-            user = _get_authenticated_user()
-            if user is None:
-                raise Unauthorized()
-            elif not _has_enough_privileges(user.id, board_id, role):
+        def wrapped(user, board, *args, **kwargs):
+            if not _has_enough_privileges(user.id, board, role):
                 raise Forbidden({
                     'role': MembershipErrorMessage.INSUFFICIENT_PRIVILEGES
                 })
-            kwargs['board_id'] = board_id
+            kwargs['board'] = board
             return f(*args, **kwargs)
         return wrapped
     return wrapper
@@ -88,16 +88,20 @@ def requires_minimum_role(role):
 def requires_board_access():
     def wrapper(f):
         @wraps(f)
-        def wrapped(board_id, *args, **kwargs):
-            user = _get_authenticated_user()
-            if user is None:
-                raise Unauthorized()
-            board = _get_board(user.id, board_id)
-            if board is None:
-                raise Forbidden({
-                    'board': MembershipErrorMessage.NO_BOARD_ACCESS
-                })
+        def wrapped(user, board, *args, **kwargs):
+            _verify_board_access(user.id, board)
             kwargs['board'] = board
+            return f(*args, **kwargs)
+        return wrapped
+    return wrapper
+
+
+def requires_bullet_access():
+    def wrapper(f):
+        @wraps(f)
+        def wrapped(user, bullet, *args, **kwargs):
+            _verify_bullet_access(user.id, bullet)
+            kwargs['bullet'] = bullet
             return f(*args, **kwargs)
         return wrapped
     return wrapper

@@ -27,13 +27,14 @@ def _validate_board_privacy(privacy):
 
 class CreateBoardSchema(Schema):
     name = fields.Str(required=True, validate=_validate_board_name)
+    description = fields.Str()
     privacy = fields.Str(required=True, validate=_validate_board_privacy)
 
 
 class ModifyBoardSchema(Schema):
     name = fields.Str(validate=_validate_board_name)
     description = fields.Str()
-    privacy = fields.Bool()
+    privacy = fields.Str()
 
 
 class BoardSchema(BaseSchema):

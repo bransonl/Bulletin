@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: cb8f42ec95c1
+Revision ID: 387d20621804
 Revises: 
-Create Date: 2017-07-17 15:24:34.496172
+Create Date: 2017-07-25 19:16:39.997002
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'cb8f42ec95c1'
+revision = '387d20621804'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,6 +23,7 @@ def upgrade():
     sa.Column('name', sa.String(length=80), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('privacy', sa.Enum('private', 'secret', 'public', name='privacytype'), nullable=False),
+    sa.Column('valid', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.PrimaryKeyConstraint('id')
@@ -40,12 +41,13 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('board_id', sa.Integer(), nullable=False),
     sa.Column('parent_id', sa.Integer(), nullable=True),
-    sa.Column('root_id', sa.Integer(), nullable=False),
+    sa.Column('root_id', sa.Integer(), nullable=True),
     sa.Column('previous_id', sa.Integer(), nullable=True),
     sa.Column('bullet_type', sa.Enum('group', 'bullet', name='bullettype'), nullable=False),
     sa.Column('label', sa.String(length=80), nullable=False),
     sa.Column('description', sa.Text(), nullable=True),
     sa.Column('value', sa.Integer(), nullable=True),
+    sa.Column('valid', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.Column('updated_at', sa.DateTime(), server_default=sa.text('now()'), nullable=False),
     sa.ForeignKeyConstraint(['board_id'], ['board.id'], ),

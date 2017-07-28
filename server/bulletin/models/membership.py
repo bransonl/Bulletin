@@ -1,13 +1,5 @@
-import enum
-
 from bulletin import db
-
-
-class RoleType(enum.Enum):
-    viewer = 1
-    contributor = 2
-    admin = 3
-    owner = 4
+from bulletin.types.role import RoleType
 
 
 class Membership(db.Model):

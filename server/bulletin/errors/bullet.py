@@ -1,5 +1,5 @@
 from bulletin.errors.base import NotFound, Resource, ResourceIdName, \
-    InternalServer, construct_errors
+    InternalServer, construct_errors, BadRequest
 
 
 class BulletErrorKey:

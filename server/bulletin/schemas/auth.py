@@ -54,5 +54,5 @@ class PasswordSchema(BaseSchema):
 
 class AccessTokenSchema(BaseSchema):
     token = fields.Str(required=True)
-    account_id = fields.Int(required=True, dump_to='accountId')
+    user_id = fields.Int(required=True, dump_to='userId')
     username = fields.Str(required=True)

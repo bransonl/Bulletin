@@ -43,7 +43,7 @@ def login(data):
 
     return AccessTokenSchema(wrap=True).to_json({
         'token': jwttoken.encode(user),
-        'account_id': user.id,
+        'user_id': user.id,
         'username': user.username
     })
 
@@ -58,7 +58,7 @@ def signup(data):
     db.session.commit()
     return AccessTokenSchema(wrap=True).to_json({
         'token': jwttoken.encode(user),
-        'account_id': user.id,
+        'user_id': user.id,
         'username': user.username
     })
 
