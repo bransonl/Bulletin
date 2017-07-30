@@ -1,5 +1,6 @@
 from bulletin import app, db
 from bulletin.common import auth, validation
+from bulletin.libs.bullet import build_bullet_tree
 from bulletin.models.board import Board
 from bulletin.models.membership import Membership, RoleType
 from bulletin.schemas.base import BaseSchema
@@ -19,8 +20,9 @@ def get_boards(user):
 @validation.pass_board_by_id()
 @auth.requires_board_access()
 def get_board(board):
-    board.bullets = list(filter(lambda bullet: bullet.valid is True,
-                                board.bullets)) # TODO: do bullets here
+    bullets = list(filter(lambda bullet: bullet.valid is True,
+                          board.bullets))
+    board.bullets = build_bullet_tree(bullets)
     return BoardSchema(wrap=True).to_json(board)
 
 

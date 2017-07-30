@@ -1,5 +1,6 @@
 from bulletin import app, db
 from bulletin.common import auth, validation
+from bulletin.libs.bullet import propogate_bullet_id_update
 from bulletin.models.bullet import Bullet
 from bulletin.models.membership import RoleType
 from bulletin.schemas.base import BaseSchema
@@ -50,6 +51,7 @@ def modify_bullet(data, bullet, board):
                     description=data.get('description') or bullet.description,
                     value=data.get('value') or bullet.value)
     db.session.add(modify)
+    propogate_bullet_id_update(bullet.id, modify.id)
     db.session.commit()
     return BulletSchema(wrap=True).to_json(modify)
 

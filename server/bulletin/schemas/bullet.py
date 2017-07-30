@@ -31,6 +31,6 @@ class BulletSchema(BaseSchema):
     label = fields.Str(required=True)
     description = fields.Str()
     value = fields.Int(required=True)
-    valid = fields.Bool(required=True)
+    children = fields.Nested('self', many=True)
     created_at = fields.DateTime(dump_to='createdAt')
     updated_at = fields.DateTime(dump_to='updatedAt')
