@@ -79,7 +79,7 @@ def pass_bullet_by_id():
     return wrapper
 
 
-def pass_user_by_id(authenticated_as=False):
+def pass_target_user_by_id(authenticated_as=False):
     def wrapper(f):
         @wraps(f)
         def wrapped(user_id=None, user=None, *args, **kwargs):
@@ -88,11 +88,12 @@ def pass_user_by_id(authenticated_as=False):
                     raise Forbidden({
                         'user': UserErrorMessage.NOT_AUTHENTICATED_AS
                     })
-            if user is None and user_id is not None:
-                user = User.query.get(user_id)
-            if user is None:
+            target_user = User.query.get(user_id)
+            if target_user is None:
                 raise UserNotFound(user_id)
-            kwargs['target_user'] = user
+            kwargs['target_user'] = target_user
+            if user is not None:
+                kwargs['user'] = user
             return f(*args, **kwargs)
         return wrapped
     return wrapper
