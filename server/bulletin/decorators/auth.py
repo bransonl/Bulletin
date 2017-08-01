@@ -4,10 +4,9 @@ from flask import request
 
 from bulletin.libs import jwttoken
 
-from bulletin.errors.base import Forbidden, Unauthorized
+from bulletin.errors.base import Unauthorized
 from bulletin.errors.board import BoardNotFound
-from bulletin.errors.bullet import OrphanedBullet
-from bulletin.errors.membership import MembershipErrorMessage
+from bulletin.errors.membership import InsufficientPrivileges, NoBoardAccess
 from bulletin.models.board import PrivacyType
 from bulletin.models.membership import Membership
 from bulletin.models.user import User
@@ -47,7 +46,7 @@ def _verify_board_access(user_id, board):
         raise BoardNotFound(board.id)
     # board private and no membership
     elif board.privacy is PrivacyType.private and membership is None:
-        raise Forbidden({'role': MembershipErrorMessage.NO_BOARD_ACCESS})
+        raise NoBoardAccess()
 
 
 def requires_authentication():
@@ -68,9 +67,7 @@ def requires_minimum_role(role):
         @wraps(f)
         def wrapped(user, board, *args, **kwargs):
             if not _has_enough_privileges(user.id, board, role):
-                raise Forbidden({
-                    'role': MembershipErrorMessage.INSUFFICIENT_PRIVILEGES
-                })
+                raise InsufficientPrivileges()
             kwargs['board'] = board
             return f(*args, **kwargs)
         return wrapped

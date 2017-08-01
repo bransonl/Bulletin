@@ -5,11 +5,11 @@ import bcrypt
 
 from bulletin import app, db
 from bulletin.decorators import validation
-from bulletin.errors import base
+from bulletin.errors.auth import IncorrectPassword
 from bulletin.libs import jwttoken
 from bulletin.models.user import User
-from bulletin.schemas.auth import AccessTokenSchema, AuthErrorMessage, \
-    LoginSchema, PasswordSchema, SignupSchema, UsernameSchema
+from bulletin.schemas.auth import AccessTokenSchema, LoginSchema, \
+    PasswordSchema, SignupSchema, UsernameSchema
 
 
 def _encode_password(password):
@@ -35,12 +35,9 @@ def validate_password(data):
 def login(data):
     username, password = data.get('username'), data.get('password')
     user = User.query.filter_by(username=username).first()
-
     if user is None or not bcrypt.checkpw(_encode_password(password),
                                           user.password.encode('utf-8')):
-        raise base.Unauthorized(base.construct_errors(
-            'password', AuthErrorMessage.INCORRECT_PASSWORD))
-
+        raise IncorrectPassword()
     return AccessTokenSchema(wrap=True).to_json({
         'token': jwttoken.encode(user),
         'user_id': user.id,

@@ -1,5 +1,6 @@
 from marshmallow import fields, Schema, ValidationError
 
+from bulletin.errors.auth import AuthErrorMessage
 from bulletin.models.user import User
 from bulletin.schemas.base import BaseSchema
 
@@ -7,16 +8,6 @@ from bulletin.schemas.base import BaseSchema
 class AuthRequirement:
     MIN_USERNAME_LENGTH = 5
     MIN_PASSWORD_LENGTH = 8
-
-
-class AuthErrorMessage:
-    USERNAME_TOO_SHORT = 'Username must be at least {0} characters long.' \
-        .format(AuthRequirement.MIN_USERNAME_LENGTH)
-    PASSWORD_TOO_SHORT = 'Password must be at least {0} characters long.' \
-        .format(AuthRequirement.MIN_PASSWORD_LENGTH)
-    USERNAME_TAKEN = 'Username is already taken.'
-    INCORRECT_PASSWORD = 'No user found with this ' \
-                         'username and password combination'
 
 
 def _validate_username(username):
