@@ -64,7 +64,7 @@ def modify_board(board, data):
 @app.route('/boards/<int:board_id>', methods=['DELETE'])
 @auth.requires_authentication()
 @validation.pass_board_by_id()
-@auth.requires_minimum_role(RoleType.admin)
+@auth.requires_minimum_role(RoleType.owner)
 def invalidate_board(board):
     board.valid = False
     db.session.commit()
