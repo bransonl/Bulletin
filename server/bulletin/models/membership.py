@@ -14,3 +14,6 @@ class Membership(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False,
                            server_default=db.func.now(),
                            server_onupdate=db.func.now())
+
+    board = db.relationship('Board', back_populates='member_roles', lazy=True)
+    user = db.relationship('User', back_populates='memberships', lazy=True)

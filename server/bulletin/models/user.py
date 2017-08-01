@@ -13,4 +13,5 @@ class User(db.Model):
                            server_default=db.func.now(),
                            server_onupdate=db.func.now())
 
-    boards = db.relationship('Membership', backref='user', lazy=True)
+    memberships = db.relationship('Membership',
+                                  back_populates='user', lazy=True)

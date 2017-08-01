@@ -20,3 +20,5 @@ class Bullet(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False,
                            server_default=db.func.now(),
                            server_onupdate=db.func.now())
+
+    board = db.relationship('Board', back_populates='bullets', lazy=True)
