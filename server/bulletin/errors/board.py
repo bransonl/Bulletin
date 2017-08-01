@@ -1,4 +1,11 @@
 from bulletin.errors.base import NotFound, Resource, ResourceIdName
+from bulletin.schemas.board import BoardRequirement
+
+
+class BoardErrorMessage:
+    NAME_TOO_SHORT = 'Board name must be at least {0} characters long.' \
+        .format(BoardRequirement.MIN_NAME_LENGTH)
+    INVALID_PRIVACY = 'Invalid privacy type.'
 
 
 class BoardNotFound(NotFound):

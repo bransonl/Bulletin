@@ -1,5 +1,6 @@
 from marshmallow import fields, Schema, ValidationError
 
+from bulletin.errors.board import BoardErrorMessage
 from bulletin.models.board import PrivacyType
 from bulletin.schemas.base import BaseSchema
 from bulletin.schemas.bullet import BulletSchema
@@ -7,12 +8,6 @@ from bulletin.schemas.bullet import BulletSchema
 
 class BoardRequirement:
     MIN_NAME_LENGTH = 5
-
-
-class BoardErrorMessage:
-    NAME_TOO_SHORT = 'Board name must be at least {0} characters long.' \
-        .format(BoardRequirement.MIN_NAME_LENGTH)
-    INVALID_PRIVACY = 'Invalid privacy type.'
 
 
 def _validate_board_name(name):
