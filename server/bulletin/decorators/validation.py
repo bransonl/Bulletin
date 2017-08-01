@@ -92,7 +92,7 @@ def pass_user_by_id(authenticated_as=False):
                 user = User.query.get(user_id)
             if user is None:
                 raise UserNotFound(user_id)
-            kwargs['user'] = user
+            kwargs['target_user'] = user
             return f(*args, **kwargs)
         return wrapped
     return wrapper

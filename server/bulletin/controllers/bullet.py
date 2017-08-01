@@ -10,8 +10,8 @@ from bulletin.schemas.bullet import BulletSchema, CreateBulletSchema, \
 
 @app.route('/bullets/<int:bullet_id>', methods=['GET'])
 @auth.requires_authentication()
-@validation.pass_bullet_by_id()
-@auth.requires_bullet_access()
+@validation.pass_board_by_bullet_id()
+@auth.requires_board_access()
 def get_bullet(bullet):
     return BulletSchema(wrap=True).to_json(bullet)
 

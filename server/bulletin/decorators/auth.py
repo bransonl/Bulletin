@@ -47,14 +47,7 @@ def _verify_board_access(user_id, board):
         raise BoardNotFound(board.id)
     # board private and no membership
     elif board.privacy is PrivacyType.private and membership is None:
-        raise MembershipErrorMessage.NO_BOARD_ACCESS
-
-
-def _verify_bullet_access(user_id, bullet):
-    board = bullet.board
-    if board is None:
-        raise OrphanedBullet(bullet.id)
-    _verify_board_access(user_id, board)
+        raise Forbidden({'role': MembershipErrorMessage.NO_BOARD_ACCESS})
 
 
 def requires_authentication():
@@ -90,17 +83,6 @@ def requires_board_access():
         def wrapped(user, board, *args, **kwargs):
             _verify_board_access(user.id, board)
             kwargs['board'] = board
-            return f(*args, **kwargs)
-        return wrapped
-    return wrapper
-
-
-def requires_bullet_access():
-    def wrapper(f):
-        @wraps(f)
-        def wrapped(user, bullet, *args, **kwargs):
-            _verify_bullet_access(user.id, bullet)
-            kwargs['bullet'] = bullet
             return f(*args, **kwargs)
         return wrapped
     return wrapper
