@@ -7,11 +7,10 @@ from bulletin.libs import jwttoken
 from bulletin.errors.base import Forbidden, Unauthorized
 from bulletin.errors.board import BoardNotFound
 from bulletin.errors.bullet import OrphanedBullet
-
+from bulletin.errors.membership import MembershipErrorMessage
 from bulletin.models.board import PrivacyType
 from bulletin.models.membership import Membership
 from bulletin.models.user import User
-from bulletin.schemas.membership import MembershipErrorMessage
 
 
 def _get_authenticated_user():

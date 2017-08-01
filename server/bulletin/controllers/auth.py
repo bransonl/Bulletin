@@ -4,7 +4,7 @@ import hashlib
 import bcrypt
 
 from bulletin import app, db
-from bulletin.common import validation
+from bulletin.decorators import validation
 from bulletin.errors import base
 from bulletin.libs import jwttoken
 from bulletin.models.user import User

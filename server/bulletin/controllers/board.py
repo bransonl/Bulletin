@@ -1,5 +1,5 @@
 from bulletin import app, db
-from bulletin.common import auth, validation
+from bulletin.decorators import auth, validation
 from bulletin.libs.bullet import build_bullet_tree
 from bulletin.models.board import Board
 from bulletin.models.membership import Membership, RoleType
