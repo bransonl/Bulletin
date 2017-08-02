@@ -1,11 +1,13 @@
-from marshmallow import fields, Schema
+from marshmallow import fields, Schema, ValidationError
 
+from bulletin.errors.membership import MembershipErrorMessage
 from bulletin.schemas.base import BaseSchema
 from bulletin.types.role import RoleType
 
 
 def _validate_role(role):
-    return role in RoleType.__members__
+    if not role or role not in RoleType.__members__:
+        raise ValidationError(MembershipErrorMessage.INVALID_ROLE)
 
 
 class UpdateMembershipSchema(Schema):
