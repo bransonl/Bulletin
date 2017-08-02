@@ -1,4 +1,4 @@
-from bulletin import app, db
+from bulletin import app
 from bulletin.decorators import auth, validation
 from bulletin.libs.bullet import build_bullet_tree
 from bulletin.models.board import Board
@@ -30,13 +30,11 @@ def get_board(board):
 @auth.requires_authentication()
 @validation.unwrap_data(CreateBoardSchema)
 def create_board(user, data):
-    board = Board(name=data.get('name'), privacy=data.get('privacy'))
-    db.session.add(board)
-    db.session.flush()
-    membership = Membership(
-        user_id=user.id, board_id=board.id, role=RoleType.owner)
-    db.session.add(membership)
-    db.session.commit()
+    board = Board.create(name=data.get('name'),
+                         description=data.get('description'),
+                         privacy=data.get('privacy'))
+    Membership.create(
+        board_id=board.id, user_id=user.id, role=RoleType.owner)
     return BoardSchema(wrap=True).to_json(board)
 
 
@@ -46,11 +44,11 @@ def create_board(user, data):
 @auth.requires_minimum_role(RoleType.admin)
 @validation.unwrap_data(ModifyBoardSchema)
 def modify_board(board, data):
-    board.name = data.get('name') or board.name
-    board.description = data.get('description') or board.description
-    board.privacy = data.get('privacy') or board.privacy
-    db.session.commit()
-    bullets = filter(lambda bullet: bullet.valid is True, board.bullets) # TODO: do bullets here
+    board.update(name=data.get('name'),
+                 description=data.get('description'),
+                 privacy=data.get('privacy'))
+    bullets = build_bullet_tree(
+        filter(lambda bullet: bullet.valid is True, board.bullets))
     return BoardSchema(wrap=True).to_json({
         'id': board.id,
         'name': board.name,
@@ -66,6 +64,5 @@ def modify_board(board, data):
 @validation.pass_board_by_id()
 @auth.requires_minimum_role(RoleType.owner)
 def invalidate_board(board):
-    board.valid = False
-    db.session.commit()
+    board.invalidate()
     return BaseSchema(wrap=True).to_json({})

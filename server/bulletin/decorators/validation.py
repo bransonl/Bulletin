@@ -30,7 +30,7 @@ def pass_board_by_id():
     def wrapper(f):
         @wraps(f)
         def wrapped(board_id=None, data=None, *args, **kwargs):
-            board = Board.query.get(board_id or data.get('board_id'))
+            board = Board.get_by_id(board_id or data.get('board_id'))
             if board is None:
                 raise BoardNotFound(board_id)
             kwargs['board'] = board
@@ -45,7 +45,7 @@ def pass_board_by_bullet_id():
     def wrapper(f):
         @wraps(f)
         def wrapped(bullet_id=None, data=None, *args, **kwargs):
-            bullet = Bullet.query.get(bullet_id or data.get('bullet_id'))
+            bullet = Bullet.get_by_id(bullet_id or data.get('bullet_id'))
             if bullet is None:
                 raise BulletNotFound(bullet_id)
             elif bullet.valid is False:
@@ -66,7 +66,7 @@ def pass_bullet_by_id():
     def wrapper(f):
         @wraps(f)
         def wrapped(bullet_id=None, data=None, *args, **kwargs):
-            bullet = Bullet.query.get(bullet_id or data.get('bullet_id'))
+            bullet = Bullet.get_by_id(bullet_id or data.get('bullet_id'))
             if bullet is None:
                 raise BulletNotFound(bullet_id)
             elif bullet.valid is False:
@@ -88,7 +88,7 @@ def pass_target_user_by_id(authenticated_as=False):
                     raise Forbidden({
                         'user': UserErrorMessage.NOT_AUTHENTICATED_AS
                     })
-            target_user = User.query.get(user_id)
+            target_user = User.get_by_id(user_id)
             if target_user is None:
                 raise UserNotFound(user_id)
             kwargs['target_user'] = target_user

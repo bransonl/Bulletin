@@ -3,7 +3,7 @@ import hashlib
 
 import bcrypt
 
-from bulletin import app, db
+from bulletin import app
 from bulletin.decorators import validation
 from bulletin.errors.auth import IncorrectPassword
 from bulletin.libs import jwttoken
@@ -30,11 +30,24 @@ def validate_password(data):
     return PasswordSchema(wrap=True).to_json({'password': ''})
 
 
+@app.route('/signup', methods=['POST'])
+@validation.unwrap_data(SignupSchema)
+def signup(data):
+    username, password = data.get('username'), data.get('password')
+    hashed = bcrypt.hashpw(_encode_password(password), bcrypt.gensalt())
+    user = User.create(username=username, password=hashed.decode('utf-8'))
+    return AccessTokenSchema(wrap=True).to_json({
+        'token': jwttoken.encode(user),
+        'user_id': user.id,
+        'username': user.username
+    })
+
+
 @app.route('/login', methods=['POST'])
 @validation.unwrap_data(LoginSchema)
 def login(data):
     username, password = data.get('username'), data.get('password')
-    user = User.query.filter_by(username=username).first()
+    user = User.get_by_username(username)
     if user is None or not bcrypt.checkpw(_encode_password(password),
                                           user.password.encode('utf-8')):
         raise IncorrectPassword()
@@ -43,19 +56,3 @@ def login(data):
         'user_id': user.id,
         'username': user.username
     })
-
-
-@app.route('/signup', methods=['POST'])
-@validation.unwrap_data(SignupSchema)
-def signup(data):
-    username, password = data.get('username'), data.get('password')
-    hashed = bcrypt.hashpw(_encode_password(password), bcrypt.gensalt())
-    user = User(username=username, password=hashed.decode('utf-8'))
-    db.session.add(user)
-    db.session.commit()
-    return AccessTokenSchema(wrap=True).to_json({
-        'token': jwttoken.encode(user),
-        'user_id': user.id,
-        'username': user.username
-    })
-

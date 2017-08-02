@@ -17,3 +17,29 @@ class Membership(db.Model):
 
     board = db.relationship('Board', back_populates='member_roles', lazy=True)
     user = db.relationship('User', back_populates='memberships', lazy=True)
+
+    @staticmethod
+    def get_board_members(board_id):
+        return Membership.query.filter_by(board_id=board_id).all()
+
+    @staticmethod
+    def get_user_role(board_id, user_id):
+        return Membership.query \
+            .filter_by(board_id=board_id) \
+            .filter_by(user_id=user_id) \
+            .first()
+
+    @staticmethod
+    def create(board_id, user_id, role):
+        membership = Membership(board_id=board_id, user_id=user_id, role=role)
+        db.session.add(membership)
+        db.session.commit()
+        return membership
+
+    def update(self, role):
+        self.role = role
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

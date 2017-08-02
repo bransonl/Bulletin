@@ -15,3 +15,26 @@ class User(db.Model):
 
     memberships = db.relationship('Membership',
                                   back_populates='user', lazy=True)
+
+    @staticmethod
+    def get_by_id(user_id):
+        return User.query.get(user_id)
+
+    @staticmethod
+    def get_by_username(username):
+        return User.query.filter_by(username=username).first()
+
+    @staticmethod
+    def create(username, password):
+        user = User(username=username, password=password)
+        db.session.add(user)
+        db.session.commit()
+        return user
+
+    def update(self, password):
+        self.password = password
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

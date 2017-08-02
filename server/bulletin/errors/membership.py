@@ -7,6 +7,7 @@ class MembershipErrorKey:
 
 
 class MembershipErrorMessage:
+    INVALID_ROLE = 'Invalid role type'
     INSUFFICIENT_PRIVILEGES = 'You do not have sufficient privileges to ' \
                               'perform this action.'
     NO_BOARD_ACCESS = 'You do not have access to this board.'
