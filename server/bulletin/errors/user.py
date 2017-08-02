@@ -8,5 +8,4 @@ class UserErrorMessage:
 class UserNotFound(NotFound):
     def __init__(self, username):
         resource, id_name = Resource.USER, ResourceIdName.USERNAME
-        self.errors = NotFound.build_error(
-            resource, NotFound.build_message(resource, id_name, username))
+        self.message = NotFound.build_message(resource, id_name, username)

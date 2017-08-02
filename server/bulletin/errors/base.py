@@ -19,8 +19,8 @@ class ErrorMessage:
     FORBIDDEN = 'Forbidden'
     NOT_FOUND = 'Not found'
     METHOD_NOT_ALLOWED = 'Method not allowed'
-    INVALID_DATA = 'Invalid data',
     INTERNAL_SERVER = 'Internal server'
+    INVALID_DATA = 'Invalid data',
 
 
 class Resource:
@@ -76,12 +76,6 @@ class NotFound(Error):
         return '{0} with {1} \'{2}\' not found' \
             .format(resource, id_name, resource_id)
 
-    @staticmethod
-    def build_error(resource, message):
-        return {
-            resource.lower(): [message]
-        }
-
     def __init__(self, errors=None):
         self.errors = errors or []
 
@@ -103,18 +97,6 @@ class InternalServer(Error):
 
     def __init__(self, errors=None):
         self.errors = errors or []
-
-
-# Helper method to construct error object to pass into Error classes
-
-def construct_errors(label, message, existing_errors=None):
-    if existing_errors is not None and existing_errors.get(label) is not None:
-        new_errors = existing_errors.copy()
-        new_errors[label].append(message)
-        return new_errors
-    return {
-        label: [message]
-    }
 
 
 @app.errorhandler(404)

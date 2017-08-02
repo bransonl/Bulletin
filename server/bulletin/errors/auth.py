@@ -1,9 +1,5 @@
-from bulletin.errors.base import Unauthorized, construct_errors
+from bulletin.errors.base import Unauthorized
 from bulletin.schemas.auth import AuthRequirement
-
-
-class AuthErrorKey:
-    PASSWORD = 'password'
 
 
 class AuthErrorMessage:
@@ -18,5 +14,4 @@ class AuthErrorMessage:
 
 class IncorrectPassword(Unauthorized):
     def __init__(self):
-        self.errors = construct_errors(AuthErrorKey.PASSWORD,
-                                       AuthErrorMessage.INCORRECT_PASSWORD)
+        self.message = AuthErrorMessage.INCORRECT_PASSWORD
