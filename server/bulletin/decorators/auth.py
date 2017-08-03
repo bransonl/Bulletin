@@ -25,23 +25,6 @@ def _get_authenticated_user():
     return user
 
 
-def _has_enough_privileges(board_id, user_id, role):
-    membership = Membership.get_user_role(board_id=board_id, user_id=user_id)
-    if membership is None:
-        return False
-    return membership.role >= role
-
-
-def _verify_board_access(board, user_id):
-    membership = Membership.get_user_role(board.id, user_id)
-    # board secret and no membership
-    if board.privacy is PrivacyType.secret and membership is None:
-        raise BoardNotFound(board.id)
-    # board private and no membership
-    elif board.privacy is PrivacyType.private and membership is None:
-        raise NoBoardAccess()
-
-
 def requires_authentication():
     def wrapper(f):
         @wraps(f)
@@ -59,7 +42,8 @@ def requires_minimum_role(role):
     def wrapper(f):
         @wraps(f)
         def wrapped(user, board, *args, **kwargs):
-            if not _has_enough_privileges(board.id, user.id, role):
+            membership = Membership.get_user_role(user.id, board.id)
+            if membership is None or membership.role < role:
                 raise InsufficientPrivileges()
             kwargs['board'] = board
             return f(*args, **kwargs)
@@ -71,7 +55,13 @@ def requires_board_access():
     def wrapper(f):
         @wraps(f)
         def wrapped(user, board, *args, **kwargs):
-            _verify_board_access(board, user.id)
+            membership = Membership.get_user_role(board.id, user.id)
+            # board secret and no membership
+            if board.privacy is PrivacyType.secret and membership is None:
+                raise BoardNotFound(board.id)
+            # board private and no membership
+            elif board.privacy is PrivacyType.private and membership is None:
+                raise NoBoardAccess()
             kwargs['board'] = board
             return f(*args, **kwargs)
         return wrapped

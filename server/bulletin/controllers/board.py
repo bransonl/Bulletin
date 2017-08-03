@@ -33,8 +33,7 @@ def create_board(user, data):
     board = Board.create(name=data.get('name'),
                          description=data.get('description'),
                          privacy=data.get('privacy'))
-    Membership.create(
-        board_id=board.id, user_id=user.id, role=RoleType.owner)
+    Membership.create(user.id, board.id, RoleType.owner)
     return BoardSchema(wrap=True).to_json(board)
 
 
