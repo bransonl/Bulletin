@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import jsonify
 
 from bulletin import app
 from bulletin.schemas.error import ErrorSchema, MethodNotAllowedSchema

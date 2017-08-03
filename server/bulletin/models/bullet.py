@@ -1,5 +1,4 @@
 from bulletin import db
-from bulletin.libs.bullet import propogate_bullet_id_update
 from bulletin.types.bullet import BulletType
 
 
@@ -68,7 +67,9 @@ class Bullet(db.Model):
             self.valid = False
             db.session.add(bullet)
             db.session.flush()
-            propogate_bullet_id_update(self.id, bullet.id)
+            children = Bullet.query.filter_by(parent_id=self.id).all()
+            for child in children:
+                child.parent_id = bullet.id
             db.session.commit()
             return bullet
         return None

@@ -2,12 +2,11 @@ from functools import wraps
 
 from flask import request
 
-from bulletin.errors.base import Forbidden
 from bulletin.errors.board import BoardNotFound
 from bulletin.errors.bullet import BulletNotFound, InvalidBullet, \
     OrphanedBullet
 from bulletin.errors.common import InvalidData
-from bulletin.errors.user import UserErrorMessage, UserNotFound
+from bulletin.errors.user import NotAuthenticatedAs, UserNotFound
 from bulletin.models.board import Board
 from bulletin.models.bullet import Bullet
 from bulletin.models.user import User
@@ -85,16 +84,14 @@ def pass_target_user_by_id(authenticated_as=False):
         def wrapped(user_id=None, user=None, *args, **kwargs):
             if authenticated_as is True:
                 if user is None or user_id != user.id:
-                    raise Forbidden({
-                        'user': UserErrorMessage.NOT_AUTHENTICATED_AS
-                    })
-            target_user = User.get_by_id(user_id)
-            if target_user is None:
-                raise UserNotFound(user_id)
-            kwargs['target_user'] = target_user
+                    raise NotAuthenticatedAs()
+            else:
+                target_user = User.get_by_id(user_id)
+                if target_user is None:
+                    raise UserNotFound(user_id)
+                kwargs['target_user'] = target_user
             if user is not None:
                 kwargs['user'] = user
             return f(*args, **kwargs)
         return wrapped
     return wrapper
-

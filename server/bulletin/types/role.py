@@ -17,11 +17,6 @@ class RoleType(enum.Enum):
             return self.value <= other.value
         raise NotImplementedError()
 
-    def __eq__(self, other):
-        if self.__class__ is other.__class__:
-            return self.value == other.value
-        raise NotImplementedError()
-
     def __ge__(self, other):
         if self.__class__ is other.__class__:
             return self.value >= other.value

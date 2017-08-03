@@ -1,13 +1,9 @@
 from marshmallow import fields, Schema, ValidationError
 
-from bulletin.errors.board import BoardErrorMessage
+from bulletin.errors.board import BoardErrorMessage, BoardRequirement
 from bulletin.models.board import PrivacyType
 from bulletin.schemas.base import BaseSchema
 from bulletin.schemas.bullet import BulletSchema
-
-
-class BoardRequirement:
-    MIN_NAME_LENGTH = 5
 
 
 def _validate_board_name(name):

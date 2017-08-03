@@ -5,11 +5,11 @@ import bcrypt
 
 from bulletin import app
 from bulletin.decorators import validation
-from bulletin.errors.auth import IncorrectPassword
+from bulletin.errors.user import IncorrectPassword
 from bulletin.libs import jwttoken
 from bulletin.models.user import User
-from bulletin.schemas.auth import AccessTokenSchema, LoginSchema, \
-    PasswordSchema, SignupSchema, UsernameSchema
+from bulletin.schemas.user import UsernameSchema, PasswordSchema, LoginSchema, \
+    SignupSchema, AccessTokenSchema
 
 
 def _encode_password(password):

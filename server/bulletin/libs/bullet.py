@@ -1,12 +1,3 @@
-from bulletin.models.bullet import Bullet
-
-
-def propogate_bullet_id_update(previous_id, current_id):
-    children = Bullet.query.filter_by(parent_id=previous_id).all()
-    for child in children:
-        child.parent_id = current_id
-
-
 def build_bullet_tree(bullets):
     tree = []
     nodes = {}

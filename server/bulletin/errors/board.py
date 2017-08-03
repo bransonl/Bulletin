@@ -1,5 +1,8 @@
 from bulletin.errors.base import NotFound, Resource, ResourceIdName
-from bulletin.schemas.board import BoardRequirement
+
+
+class BoardRequirement:
+    MIN_NAME_LENGTH = 5
 
 
 class BoardErrorMessage:

@@ -1,4 +1,4 @@
-from bulletin import app, db
+from bulletin import app
 from bulletin.decorators import auth, validation
 from bulletin.errors.membership import NotMemberOfBoard, \
     InsufficientPrivileges, ExistingMembership
