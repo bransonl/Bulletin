@@ -9,3 +9,6 @@ database/
 
 # env file
 .env
+
+# intellij
+.idea
