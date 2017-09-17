@@ -6,12 +6,14 @@ import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 
 import 'bootstrap/scss/bootstrap.scss';
+import 'font-awesome/scss/font-awesome.scss';
 import './stylesheets/styles.scss';
 
 import rootEpic from './epics';
 import rootReducer from './reducers';
 
 import LandingComponent from './components/landing/landing.component.jsx';
+import HomeComponent from './components/home/home.component.jsx';
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
@@ -20,8 +22,9 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
+        <Route path="/home" component={HomeComponent} />
         {['/', '/register'].map(path =>
-          <Route path={path} component={LandingComponent} />)}
+          <Route key={path} path={path} component={LandingComponent} />)}
       </Switch>
     </BrowserRouter>
   </Provider>,
