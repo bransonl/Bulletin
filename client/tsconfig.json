@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es6",
+    "jsx": "react",
+    "watch": true
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./dist/",
+    "node_modules"
+  ]
+}

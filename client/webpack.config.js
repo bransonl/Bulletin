@@ -15,13 +15,28 @@ const BootstrapDependenciesPlugin = new webpack.ProvidePlugin({
 });
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devtool: 'source-map',
+  resolve: {
+    extensions: [
+      '.ts', '.tsx', '.js', '.json'
+    ]
+  },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.js$/,
+        enforce: 'pre',
+        use: 'source-map-loader'
+      },
       {
         test: /\.jsx?$/,
         use: [
