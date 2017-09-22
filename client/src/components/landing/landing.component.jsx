@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import LoginFormComponent from './login-form.component.jsx';
-import RegisterFormComponent from './register-form.component.jsx';
+import SignupFormComponent from './signup-form.component.jsx';
 
 import './landing.component.scss';
 
 const PathNames = {
   LOGIN: '/',
-  REGISTER: '/register'
+  SIGNUP: '/signup'
 };
 
 const FormType = {
-  LOGIN: 'Register',
-  REGISTER: 'Back'
+  LOGIN: 'Sign up',
+  SIGNUP: 'Back'
 };
 
 class LandingComponent extends Component {
@@ -23,7 +23,7 @@ class LandingComponent extends Component {
     const { pathname } = props.location;
     this.state = {
       formShown: pathname === PathNames.LOGIN ?
-        FormType.LOGIN : FormType.REGISTER
+        FormType.LOGIN : FormType.SIGNUP
     };
   }
 
@@ -34,8 +34,8 @@ class LandingComponent extends Component {
 
     if (this.state.formShown === FormType.LOGIN) {
       return <LoginFormComponent />
-    } else if (this.state.formShown === FormType.REGISTER) {
-      return <RegisterFormComponent />
+    } else if (this.state.formShown === FormType.SIGNUP) {
+      return <SignupFormComponent />
     }
   }
 
@@ -46,9 +46,9 @@ class LandingComponent extends Component {
 
     if (this.state.formShown === FormType.LOGIN) {
       this.setState({
-        formShown: FormType.REGISTER
+        formShown: FormType.SIGNUP
       });
-    } else if (this.state.formShown === FormType.REGISTER) {
+    } else if (this.state.formShown === FormType.SIGNUP) {
       this.setState({
         formShown: FormType.LOGIN
       });

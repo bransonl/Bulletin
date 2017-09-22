@@ -3,12 +3,12 @@ import { Field, reduxForm } from 'redux-form';
 
 import { LoginFormErrors, LoginFormComponent } from './login-form.component.jsx';
 
-const RegisterFormErrors = {
+const SignupFormErrors = {
   MISSING_CONFIRM_PASSWORD: 'Please confirm your password.',
   PASSWORDS_DO_NOT_MATCH: 'Your passwords do not match.'
 };
 
-class RegisterFormComponent extends LoginFormComponent {
+class SignupFormComponent extends LoginFormComponent {
   onSubmit (values) {
     console.log(values);
   }
@@ -43,9 +43,9 @@ function validate (fields) {
     errors.password = LoginFormErrors.MISSING_PASSWORD;
   }
   if (!fields.confirmPassword) {
-    errors.confirmPassword = RegisterFormErrors.MISSING_CONFIRM_PASSWORD;
+    errors.confirmPassword = SignupFormErrors.MISSING_CONFIRM_PASSWORD;
   } else if (fields.confirmPassword !== fields.password) {
-    errors.confirmPassword = RegisterFormErrors.PASSWORDS_DO_NOT_MATCH;
+    errors.confirmPassword = SignupFormErrors.PASSWORDS_DO_NOT_MATCH;
   }
 
   return errors;
@@ -53,5 +53,5 @@ function validate (fields) {
 
 export default reduxForm({
   validate,
-  form: 'RegisterForm'
-})(RegisterFormComponent);
+  form: 'SignupForm'
+})(SignupFormComponent);
