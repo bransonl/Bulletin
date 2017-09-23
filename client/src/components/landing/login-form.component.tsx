@@ -1,8 +1,7 @@
 import * as React from "react";
-import {
-  Field, InjectedFormProps,
-  reduxForm, WrappedFieldProps,
-} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
+
+import LabeledField from "../shared/labeled-field.component";
 
 const enum LoginFormError {
   MISSING_USERNAME = "Please enter your username.",
@@ -25,38 +24,23 @@ class LoginFormComponent extends React.Component<InjectedFormProps, {}> {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Field
+        <LabeledField
+          type="text"
           name="username"
           placeholder="Username"
-          component={this.renderField("Username")}
+          props={{label: "Username"}}
         />
-        <Field
+        <LabeledField
+          type="password"
           name="password"
           placeholder="Password"
-          component={this.renderField("Password")}
+          props={{label: "Password"}}
         />
         <button type="submit" className="btn btn-primary btn-block">
           Log In
         </button>
       </form>
     );
-  }
-
-  protected renderField(label: string): any {
-    return (field: WrappedFieldProps) => {
-      const {meta: {touched, error, submitFailed}} = field;
-      const className = `form-group ${touched && error ? "has-danger" : ""}`;
-
-      return (
-        <div className={className}>
-          <label>{label}</label>
-          <input type="text" className="form-control" {...field.input} />
-          <div className="form-text text-muted">
-            {touched && submitFailed ? error : ""}
-          </div>
-        </div>
-      );
-    };
   }
 
   protected onSubmit(values: LoginFormFields) {

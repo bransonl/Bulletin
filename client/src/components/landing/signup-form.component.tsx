@@ -1,6 +1,7 @@
 import * as React from "react";
-import {Field, reduxForm} from "redux-form";
+import {reduxForm} from "redux-form";
 
+import LabeledField from "../shared/labeled-field.component";
 import {
   LoginFormComponent, LoginFormError, LoginFormErrors,
   LoginFormFields,
@@ -25,20 +26,23 @@ class SignupFormComponent extends LoginFormComponent {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <Field
+        <LabeledField
+          type="text"
           name="username"
           placeholder="Username"
-          component={this.renderField("Username")}
+          props={{label: "Username"}}
         />
-        <Field
+        <LabeledField
+          type="password"
           name="password"
           placeholder="Password"
-          component={this.renderField("Password")}
+          props={{label: "Password"}}
         />
-        <Field
+        <LabeledField
+          type="password"
           name="confirmPassword"
           placeholder="Confirm Password"
-          component={this.renderField("Confirm Password")}
+          props={{label: "Confirm Password"}}
         />
         <button type="submit" className="btn btn-primary btn-block">
           Register
