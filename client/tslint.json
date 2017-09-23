@@ -6,7 +6,8 @@
   ],
   "jsRules": {},
   "rules": {
-    "interface-name": ["never-prefix"]
+    "interface-name": ["never-prefix"],
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }
