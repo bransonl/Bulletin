@@ -7,7 +7,11 @@
   "jsRules": {},
   "rules": {
     "interface-name": ["never-prefix"],
-    "object-literal-sort-keys": false
+    "object-literal-sort-keys": false,
+    "ordered-imports": [{
+      "named-imports-order": "case-insensitive",
+      "import-sources-order": "case-insensitive"
+    }]
   },
   "rulesDirectory": []
 }

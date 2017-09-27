@@ -4,13 +4,14 @@ import {AppContainer} from "react-hot-loader";
 import {Provider} from "react-redux";
 import {applyMiddleware, createStore} from "redux";
 import {createEpicMiddleware} from "redux-observable";
+import "rxjs";
 
 import "bootstrap/scss/bootstrap.scss";
 import "font-awesome/scss/font-awesome.scss";
 import "./stylesheets/styles.scss";
 
-import rootEpic from "./epics";
-import rootReducer from "./reducers";
+import rootEpic from "./state/epics";
+import rootReducer from "./state/reducers";
 import Router from "./routes";
 
 const epicMiddleware = createEpicMiddleware(rootEpic);

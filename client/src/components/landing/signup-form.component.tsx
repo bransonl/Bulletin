@@ -1,9 +1,10 @@
 import * as React from "react";
-import {reduxForm} from "redux-form";
+import {connect} from "react-redux";
+import {reduxForm, InjectedFormProps} from "redux-form";
 
 import LabeledField from "../shared/labeled-field.component";
 import {
-  LoginFormComponent, LoginFormError, LoginFormErrors,
+  LoginFormError, LoginFormErrors,
   LoginFormFields,
 } from "./login-form.component";
 
@@ -20,7 +21,7 @@ interface SignupFormErrors extends LoginFormErrors {
   confirmPassword?: string;
 }
 
-class SignupFormComponent extends LoginFormComponent {
+class SignupFormComponent extends React.Component<InjectedFormProps, {}> {
   public render() {
     const {handleSubmit} = this.props;
 
