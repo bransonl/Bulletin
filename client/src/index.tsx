@@ -10,6 +10,9 @@ import "bootstrap/scss/bootstrap.scss";
 import "font-awesome/scss/font-awesome.scss";
 import "./stylesheets/styles.scss";
 
+import "bootstrap/js/src/util";
+import "bootstrap/js/src/alert";
+
 import rootEpic from "./state/epics";
 import rootReducer from "./state/reducers";
 import Router from "./routes";

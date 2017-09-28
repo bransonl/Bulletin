@@ -3,6 +3,8 @@ import {Error} from "../types/error.type";
 
 const error = (state: Error = {code: null, message: ""}, action: ErrorAction): Error => {
   switch (action.type) {
+    case ErrorActionType.CLEAR_ERROR:
+      return {code: null, message: ""};
     case ErrorActionType.REQUEST_REJECTED:
       return action.payload;
     default:

@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Field, InjectedFormProps, WrappedFieldProps} from "redux-form";
+import {Field, WrappedFieldProps} from "redux-form";
 
 interface LabeledTypedWrappedFieldProps extends WrappedFieldProps {
   label: string;
