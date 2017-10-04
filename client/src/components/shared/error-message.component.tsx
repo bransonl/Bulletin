@@ -4,12 +4,17 @@ import {connect} from "react-redux";
 import {Error} from "../../state/types/error.type";
 import {clearError, ErrorAction} from "../../state/actions/error.action";
 
-interface ErrorProps {
+interface PropsFromState {
   error: Error;
+}
+
+interface PropsFromDispatch {
   clearError: () => ErrorAction;
 }
 
-const ErrorMessage: React.SFC<ErrorProps> = (props: ErrorProps) => {
+interface Props extends PropsFromState, PropsFromDispatch {}
+
+const ErrorMessage: React.SFC<Props> = (props: Props) => {
   const {error} = props;
 
   if (error && error.code && error.message) {
@@ -31,8 +36,8 @@ const ErrorMessage: React.SFC<ErrorProps> = (props: ErrorProps) => {
   return null;
 };
 
-function mapStateToProps({error}: {error: Error}) {
+function mapStateToProps({error}: {error: Error}): PropsFromState {
   return {error};
 }
 
-export default connect(mapStateToProps, {clearError})(ErrorMessage);
+export default connect<PropsFromState, PropsFromDispatch>(mapStateToProps, {clearError})(ErrorMessage);

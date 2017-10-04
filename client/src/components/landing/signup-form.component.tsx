@@ -3,10 +3,9 @@ import {connect} from "react-redux";
 import {reduxForm, InjectedFormProps} from "redux-form";
 
 import LabeledField from "../shared/labeled-field.component";
-import {
-  LoginFormError, LoginFormErrors,
-  LoginFormFields,
-} from "./login-form.component";
+import {LoginFormError, LoginFormErrors, LoginFormFields} from "./login-form.component";
+import {signupRequest, UserAction} from "../../state/actions/user.action";
+import {clearError, ErrorAction} from "../../state/actions/error.action";
 
 const SignupFormError = {
   MISSING_CONFIRM_PASSWORD: "Please confirm your password.",
@@ -21,7 +20,20 @@ interface SignupFormErrors extends LoginFormErrors {
   confirmPassword?: string;
 }
 
-class SignupFormComponent extends React.Component<InjectedFormProps, {}> {
+interface PropsFromDispatch {
+  clearError: () => ErrorAction;
+  signupRequest: (username: string, password: string) => UserAction;
+}
+
+interface Props extends InjectedFormProps, PropsFromDispatch {}
+
+class SignupFormComponent extends React.Component<Props, {}> {
+  constructor(props: Props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+  }
+
   public render() {
     const {handleSubmit} = this.props;
 
@@ -52,7 +64,9 @@ class SignupFormComponent extends React.Component<InjectedFormProps, {}> {
     );
   }
 
-  protected onSubmit(fields: SignupFormFields): void {
+  protected onSubmit(values: SignupFormFields): void {
+    this.props.clearError();
+    this.props.signupRequest(values.username, values.password);
   }
 }
 
@@ -77,4 +91,4 @@ function validate(fields: SignupFormFields): SignupFormErrors {
 export default reduxForm({
   form: "SignupForm",
   validate,
-})(SignupFormComponent);
+})(connect<{}, PropsFromDispatch>(null, {clearError, signupRequest})(SignupFormComponent));

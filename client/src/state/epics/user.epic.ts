@@ -4,9 +4,9 @@ import {Observable} from "rxjs/Rx";
 
 import env from "../../env/env";
 import {
-  loginFulfilled, UserAction, UserActionType,
+  identifyUser, UserAction, UserActionType,
 } from "../actions/user.action";
-import {requestRejected} from "../actions/error.action";
+import {formRequestRejected, requestRejected} from "../actions/error.action";
 
 const loginEpic = (action$: ActionsObservable<UserAction>) => (
   action$
@@ -22,10 +22,30 @@ const loginEpic = (action$: ActionsObservable<UserAction>) => (
           "Content-Type": "application/json",
         },
       })
-        .map((res) => loginFulfilled(res.xhr.response.data))
+        .map((res) => identifyUser(res.xhr.response.data))
         .catch((err) =>
           Observable.of(requestRejected(err.xhr.response)));
     })
 );
 
-export default loginEpic;
+const signupEpic = (action$: ActionsObservable<UserAction>) => (
+  action$
+    .ofType(UserActionType.SIGNUP_REQUEST)
+    .mergeMap((action: UserAction) => {
+      const url = `${env.endpoint}/signup`;
+      return ajax({
+        url,
+        body: action.payload,
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+        .map((res) => identifyUser(res.xhr.response.data))
+        .catch((err) =>
+          Observable.of(formRequestRejected(err.xhr.response)));
+    })
+);
+
+export {loginEpic, signupEpic};

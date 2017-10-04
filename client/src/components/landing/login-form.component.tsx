@@ -5,6 +5,7 @@ import {InjectedFormProps, reduxForm} from "redux-form";
 import ErrorMessage from "../shared/error-message.component";
 import {loginRequest, UserAction} from "../../state/actions/user.action";
 import LabeledField from "../shared/labeled-field.component";
+import {clearError, ErrorAction} from "../../state/actions/error.action";
 
 const enum LoginFormError {
   MISSING_USERNAME = "Please enter your username.",
@@ -21,12 +22,15 @@ interface LoginFormErrors {
   password?: string;
 }
 
-interface LoginFormProps extends InjectedFormProps {
+interface PropsFromDispatch {
+  clearError: () => ErrorAction;
   loginRequest: (username: string, password: string) => UserAction;
 }
 
-class LoginFormComponent extends React.Component<LoginFormProps, {}> {
-  constructor(props: LoginFormProps) {
+interface Props extends InjectedFormProps, PropsFromDispatch {}
+
+class LoginFormComponent extends React.Component<Props, {}> {
+  constructor(props: Props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -57,7 +61,8 @@ class LoginFormComponent extends React.Component<LoginFormProps, {}> {
     );
   }
 
-  protected onSubmit(values: LoginFormFields) {
+  protected onSubmit(values: LoginFormFields): void {
+    this.props.clearError();
     this.props.loginRequest(values.username, values.password);
   }
 }
@@ -75,8 +80,8 @@ function validate(fields: LoginFormFields): LoginFormErrors {
   return errors;
 }
 
-export {LoginFormError, LoginFormFields, LoginFormErrors, LoginFormComponent};
+export {LoginFormError, LoginFormFields, LoginFormErrors};
 export default reduxForm({
   form: "LoginForm",
   validate,
-})(connect(null, {loginRequest})(LoginFormComponent));
+})(connect<{}, PropsFromDispatch>(null, {clearError, loginRequest})(LoginFormComponent));

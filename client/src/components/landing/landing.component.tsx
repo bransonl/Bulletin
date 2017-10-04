@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import LoginFormComponent from "./login-form.component";
 import SignupFormComponent from "./signup-form.component";
+import {clearError, ErrorAction} from "../../state/actions/error.action";
 
 import "./landing.component.scss";
 
@@ -16,11 +17,15 @@ const enum FormType {
   SIGNUP = "signup",
 }
 
+interface PropsFromDispatch {
+  clearError: () => ErrorAction;
+}
+
 interface State {
   formShown: FormType;
 }
 
-class LandingComponent extends React.Component<{}, State> {
+class LandingComponent extends React.Component<PropsFromDispatch, State> {
   constructor(props: any) {
     super(props);
 
@@ -72,6 +77,7 @@ class LandingComponent extends React.Component<{}, State> {
       return;
     }
 
+    this.props.clearError();
     if (this.state.formShown === FormType.LOGIN) {
       this.setState({
         formShown: FormType.SIGNUP,
@@ -84,4 +90,4 @@ class LandingComponent extends React.Component<{}, State> {
   }
 }
 
-export default LandingComponent;
+export default connect<{}, PropsFromDispatch>(null, {clearError})(LandingComponent);

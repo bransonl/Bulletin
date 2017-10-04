@@ -3,4 +3,8 @@ interface Error {
   message: string;
 }
 
-export {Error};
+interface FieldError extends Error {
+  errors: {[key: string]: string[]};
+}
+
+export {Error, FieldError};

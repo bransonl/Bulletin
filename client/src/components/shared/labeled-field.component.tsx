@@ -1,12 +1,24 @@
 import * as React from "react";
 import {Field, WrappedFieldProps} from "redux-form";
 
+import FieldErrorMessage from "./field-error-message.component";
+
 interface LabeledTypedWrappedFieldProps extends WrappedFieldProps {
   label: string;
   type: string;
 }
 
-const renderField = (field: LabeledTypedWrappedFieldProps): any => {
+function renderError(field: WrappedFieldProps) {
+  const {meta: {touched, error, submitFailed}, input: {name}} = field;
+  // prioritize client-sided error checking
+  if (touched && submitFailed && error) {
+    return <div className="form-text text-danger">{error}</div>;
+  } else {
+    return <FieldErrorMessage field={name} />;
+  }
+}
+
+function renderField(field: LabeledTypedWrappedFieldProps) {
   const {meta: {touched, error, submitFailed}} = field;
   const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
@@ -14,12 +26,10 @@ const renderField = (field: LabeledTypedWrappedFieldProps): any => {
     <div className={className}>
       <label>{field.label}</label>
       <input type={field.type} className="form-control" {...field.input} />
-      <div className="form-text text-muted">
-        {touched && submitFailed ? error : ""}
-      </div>
+      {renderError(field)}
     </div>
   );
-};
+}
 
 const LabeledField = (props: any) => (
   <Field
