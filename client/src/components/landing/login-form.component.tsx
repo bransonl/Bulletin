@@ -41,7 +41,7 @@ class LoginFormComponent extends React.Component<Props, {}> {
 
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
-        <ErrorMessage />
+        <ErrorMessage dismissible={false} />
         <LabeledField
           type="text"
           name="username"

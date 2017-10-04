@@ -12,23 +12,39 @@ interface PropsFromDispatch {
   clearError: () => ErrorAction;
 }
 
-interface Props extends PropsFromState, PropsFromDispatch {}
+interface PassedProps {
+  dismissible?: boolean;
+}
+
+interface Props extends PropsFromState, PropsFromDispatch, PassedProps {}
+
+function renderDismissButton(props: Props) {
+  // check if false to "default" to true if not explicitly false
+  if (props.dismissible === false) {
+    return null;
+  } else {
+    return (
+      <button
+        type="button"
+        className="close"
+        data-dismiss="alert"
+        aria-label="close"
+        onClick={props.clearError}
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    );
+  }
+}
 
 const ErrorMessage: React.SFC<Props> = (props: Props) => {
-  const {error} = props;
+  const {dismissible, error} = props;
 
   if (error && error.code && error.message) {
+    const className = `alert alert-danger${dismissible ? " alert-dismissible fade show" : ""}`;
     return (
-      <div className="alert alert-danger alert-dismissable fade show" role="alert">
-        <button
-          type="button"
-          className="close"
-          data-dismiss="alert"
-          aria-label="close"
-          onClick={props.clearError}
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
+      <div className={className} role="alert">
+        {renderDismissButton(props)}
         {error.message}
       </div>
     );
@@ -40,4 +56,4 @@ function mapStateToProps({error}: {error: Error}): PropsFromState {
   return {error};
 }
 
-export default connect<PropsFromState, PropsFromDispatch>(mapStateToProps, {clearError})(ErrorMessage);
+export default connect<PropsFromState, PropsFromDispatch, PassedProps>(mapStateToProps, {clearError})(ErrorMessage);
