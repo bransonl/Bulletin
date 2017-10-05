@@ -27,10 +27,10 @@ interface PropsFromDispatch {
   loginRequest: (username: string, password: string) => UserAction;
 }
 
-interface Props extends InjectedFormProps, PropsFromDispatch {}
+type LoginFormProps = InjectedFormProps & PropsFromDispatch;
 
-class LoginFormComponent extends React.Component<Props, {}> {
-  constructor(props: Props) {
+class LoginFormComponent extends React.Component<LoginFormProps, {}> {
+  constructor(props: LoginFormProps) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -84,4 +84,4 @@ export {LoginFormError, LoginFormFields, LoginFormErrors};
 export default reduxForm({
   form: "LoginForm",
   validate,
-})(connect<{}, PropsFromDispatch>(null, {clearError, loginRequest})(LoginFormComponent));
+})(connect<null, PropsFromDispatch>(null, {clearError, loginRequest})(LoginFormComponent));

@@ -16,9 +16,9 @@ interface PassedProps {
   dismissible?: boolean;
 }
 
-interface Props extends PropsFromState, PropsFromDispatch, PassedProps {}
+type ErrorMessageProps = PropsFromState & PropsFromDispatch & PassedProps;
 
-function renderDismissButton(props: Props) {
+function renderDismissButton(props: ErrorMessageProps) {
   // check if false to "default" to true if not explicitly false
   if (props.dismissible === false) {
     return null;
@@ -37,7 +37,7 @@ function renderDismissButton(props: Props) {
   }
 }
 
-const ErrorMessage: React.SFC<Props> = (props: Props) => {
+const ErrorMessage: React.SFC<ErrorMessageProps> = (props) => {
   const {dismissible, error} = props;
 
   if (error && error.code && error.message) {

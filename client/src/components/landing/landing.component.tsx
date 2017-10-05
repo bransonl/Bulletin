@@ -90,4 +90,4 @@ class LandingComponent extends React.Component<PropsFromDispatch, State> {
   }
 }
 
-export default connect<{}, PropsFromDispatch>(null, {clearError})(LandingComponent);
+export default connect<null, PropsFromDispatch>(null, {clearError})(LandingComponent);

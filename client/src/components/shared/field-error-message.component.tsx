@@ -11,9 +11,9 @@ interface PassedProps {
   field: string;
 }
 
-interface Props extends PropsFromState, PassedProps {}
+type FieldErrorMessageProps = PropsFromState & PassedProps;
 
-const FieldErrorMessage: React.SFC<Props> = (props: Props) => {
+const FieldErrorMessage: React.SFC<FieldErrorMessageProps> = (props) => {
   const {error, field} = props;
 
   if (error && error.code && error.errors && error.errors[field] && error.errors[field].length > 0) {
@@ -26,4 +26,4 @@ function mapStateToProps({error}: {error: FieldError}) {
   return {error};
 }
 
-export default connect<PropsFromState, {}, PassedProps>(mapStateToProps, null)(FieldErrorMessage);
+export default connect<PropsFromState, null, PassedProps>(mapStateToProps, null)(FieldErrorMessage);

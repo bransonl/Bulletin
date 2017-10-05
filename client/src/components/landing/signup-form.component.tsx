@@ -25,10 +25,10 @@ interface PropsFromDispatch {
   signupRequest: (username: string, password: string) => UserAction;
 }
 
-interface Props extends InjectedFormProps, PropsFromDispatch {}
+type SignupFormProps = InjectedFormProps & PropsFromDispatch;
 
-class SignupFormComponent extends React.Component<Props, {}> {
-  constructor(props: Props) {
+class SignupFormComponent extends React.Component<SignupFormProps, {}> {
+  constructor(props: SignupFormProps) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
@@ -91,4 +91,4 @@ function validate(fields: SignupFormFields): SignupFormErrors {
 export default reduxForm({
   form: "SignupForm",
   validate,
-})(connect<{}, PropsFromDispatch>(null, {clearError, signupRequest})(SignupFormComponent));
+})(connect<null, PropsFromDispatch>(null, {clearError, signupRequest})(SignupFormComponent));

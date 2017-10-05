@@ -8,12 +8,11 @@ const enum ErrorActionType {
 
 interface ErrorAction {
   type: ErrorActionType;
-  payload: Error | FieldError | null;
+  payload?: Error | FieldError | null;
 }
 
 const clearError = (): ErrorAction => ({
   type: ErrorActionType.CLEAR_ERROR,
-  payload: null,
 });
 
 const requestRejected = (payload: any): ErrorAction => ({

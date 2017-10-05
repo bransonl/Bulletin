@@ -1,11 +1,18 @@
 import {ErrorAction, ErrorActionType} from "../actions/error.action";
 import {Error, FieldError} from "../types/error.type";
 
-const error = (state: Error | FieldError = {code: null, message: "", errors: {}}, action: ErrorAction):
-  Error | FieldError => {
+type ErrorState = Error | FieldError;
+
+const defaultError: ErrorState = {
+  code: null,
+  message: "",
+  errors: {},
+};
+
+const error = (state: ErrorState = defaultError, action: ErrorAction): ErrorState => {
   switch (action.type) {
     case ErrorActionType.CLEAR_ERROR:
-      return {code: null, message: ""};
+      return defaultError;
     case ErrorActionType.REQUEST_REJECTED:
     case ErrorActionType.FORM_REQUEST_REJECTED:
       return action.payload;
@@ -14,4 +21,5 @@ const error = (state: Error | FieldError = {code: null, message: "", errors: {}}
   }
 };
 
+export {ErrorState};
 export default error;

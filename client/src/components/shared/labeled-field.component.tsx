@@ -3,9 +3,9 @@ import {Field, WrappedFieldProps} from "redux-form";
 
 import FieldErrorMessage from "./field-error-message.component";
 
-interface LabeledTypedWrappedFieldProps extends WrappedFieldProps {
-  label: string;
-  type: string;
+interface LabeledFieldProps extends WrappedFieldProps {
+  label?: string;
+  type?: string;
 }
 
 function renderError(field: WrappedFieldProps) {
@@ -18,8 +18,8 @@ function renderError(field: WrappedFieldProps) {
   }
 }
 
-function renderField(field: LabeledTypedWrappedFieldProps) {
-  const {meta: {touched, error, submitFailed}} = field;
+function renderField(field: LabeledFieldProps) {
+  const {meta: {touched, error}} = field;
   const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
   return (
