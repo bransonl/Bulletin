@@ -5,6 +5,8 @@ type UserState = UserCredentials | UserToken | null;
 
 const user = (state: UserState = null, action: UserAction): UserState => {
   switch (action.type) {
+    case UserActionType.CLEAR_USER:
+      return null;
     case UserActionType.IDENTIFY_USER:
       return action.payload as UserToken;
     default:

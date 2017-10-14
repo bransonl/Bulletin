@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {AppContainer} from "react-hot-loader";
 import {Provider} from "react-redux";
-import {applyMiddleware, createStore} from "redux";
+import {applyMiddleware, createStore, Middleware} from "redux";
 import {createEpicMiddleware} from "redux-observable";
 import "rxjs";
 
@@ -13,12 +13,19 @@ import "./stylesheets/styles.scss";
 import "bootstrap/js/src/util";
 import "bootstrap/js/src/alert";
 
+import Router from "./routes";
 import rootEpic from "./state/epics";
 import rootReducer from "./state/reducers";
-import Router from "./routes";
+import authGuardMiddleware from "./state/middlewares/auth.middleware";
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
-const store = createStore(rootReducer, applyMiddleware(epicMiddleware));
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    authGuardMiddleware,
+    epicMiddleware,
+  ),
+);
 
 const rootElement = document.getElementById("root");
 

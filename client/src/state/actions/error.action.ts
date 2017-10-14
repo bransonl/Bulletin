@@ -32,4 +32,7 @@ const formRequestRejected = (payload: any): ErrorAction => ({
   },
 });
 
-export {ErrorAction, ErrorActionType, clearError, requestRejected, formRequestRejected};
+export {
+  ErrorAction, ErrorActionType,
+  clearError, requestRejected, formRequestRejected,
+};

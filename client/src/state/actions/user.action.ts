@@ -1,6 +1,7 @@
 import {UserCredentials, UserToken} from "../types/user.type";
 
 const enum UserActionType {
+  CLEAR_USER = "clear_user",
   LOGIN_REQUEST = "login_request",
   SIGNUP_REQUEST = "signup_request",
   IDENTIFY_USER = "identify_user",
@@ -8,8 +9,12 @@ const enum UserActionType {
 
 interface UserAction {
   type: UserActionType;
-  payload: UserCredentials | UserToken;
+  payload?: UserCredentials | UserToken;
 }
+
+const clearUser = (): UserAction => ({
+  type: UserActionType.CLEAR_USER,
+});
 
 const loginRequest = (username: string, password: string): UserAction => ({
   type: UserActionType.LOGIN_REQUEST,
@@ -26,4 +31,7 @@ const signupRequest = (username: string, password: string): UserAction => ({
   payload: {username, password},
 });
 
-export {UserAction, UserActionType, identifyUser, loginRequest, signupRequest};
+export {
+  UserAction, UserActionType,
+  clearUser, identifyUser, loginRequest, signupRequest,
+};
