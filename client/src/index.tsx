@@ -2,7 +2,6 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {AppContainer} from "react-hot-loader";
 import {Provider} from "react-redux";
-import {createStore} from "redux";
 import "rxjs";
 
 import "bootstrap/scss/bootstrap.scss";
@@ -13,13 +12,7 @@ import "bootstrap/js/src/util";
 import "bootstrap/js/src/alert";
 
 import Router from "./routes";
-import rootReducer from "./state/reducers";
-import middleware from "./state/middlewares";
-
-const store = createStore(
-  rootReducer,
-  middleware,
-);
+import store from "./state";
 
 const rootElement = document.getElementById("root");
 
