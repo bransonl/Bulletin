@@ -1,8 +1,10 @@
+import {push} from "react-router-redux";
 import {ActionsObservable} from "redux-observable";
 import {ajax} from "rxjs/observable/dom/ajax";
 import {Observable} from "rxjs/Rx";
 
 import env from "../../env/env";
+import store from "../index";
 import {
   identifyUser, UserAction, UserActionType,
 } from "../actions/user.action";
@@ -22,6 +24,7 @@ const loginEpic = (action$: ActionsObservable<UserAction>) => (
           "Content-Type": "application/json",
         },
       })
+        .do(() => store.dispatch(push("/home")))
         .map((res) => identifyUser(res.xhr.response.data))
         .catch((err) =>
           Observable.of(requestRejected(err.xhr.response)));
@@ -42,6 +45,7 @@ const signupEpic = (action$: ActionsObservable<UserAction>) => (
           "Content-Type": "application/json",
         },
       })
+        .do(() => store.dispatch(push("/home")))
         .map((res) => identifyUser(res.xhr.response.data))
         .catch((err) =>
           Observable.of(formRequestRejected(err.xhr.response)));

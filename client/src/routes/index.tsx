@@ -33,4 +33,5 @@ const Router = () => (
   </ConnectedRouter>
 );
 
+export {history};
 export default Router;
