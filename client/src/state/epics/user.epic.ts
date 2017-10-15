@@ -4,7 +4,7 @@ import {ajax} from "rxjs/observable/dom/ajax";
 import {Observable} from "rxjs/Rx";
 
 import env from "../../env/env";
-import store from "../";
+import store from "../index";
 import {
   identifyUser, UserAction, UserActionType,
 } from "../actions/user.action";

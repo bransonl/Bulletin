@@ -1,18 +1,12 @@
-import {combineReducers} from "redux";
-import {reducer as formReducer, FormReducer} from "redux-form";
-import {routerReducer, RouterState} from "react-router-redux";
+import {combineReducers, Reducer} from "redux";
+import {reducer as formReducer} from "redux-form";
+import {routerReducer} from "react-router-redux";
 
-import error, {ErrorState} from "./error.reducer";
-import user, {UserState} from "./user.reducer";
+import error from "./error.reducer";
+import user from "./user.reducer";
+import {RootState} from "../index";
 
-interface RootState {
-  router: RouterState,
-  form: FormReducer,
-  error: ErrorState,
-  user: UserState,
-}
-
-const rootReducer = combineReducers({
+const rootReducer: Reducer<RootState> = combineReducers<RootState>({
   router: routerReducer,
   form: formReducer,
   error,
