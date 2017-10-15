@@ -10,6 +10,7 @@ import "./stylesheets/styles.scss";
 
 import "bootstrap/js/src/util";
 import "bootstrap/js/src/alert";
+import "bootstrap/js/src/collapse";
 
 import Router from "./routes";
 import store from "./state";

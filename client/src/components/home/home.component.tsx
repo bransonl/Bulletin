@@ -3,8 +3,6 @@ import {connect} from "react-redux";
 
 import HeaderComponent from "./header.component";
 
-import "./header.component.scss";
-
 class HomeComponent extends React.Component {
   public render() {
     return (

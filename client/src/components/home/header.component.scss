@@ -1,6 +1,7 @@
-.header {
-  height: 50px;
-  background-color: #4183d7;
-  color: #fff;
-  font-size: 2rem;
+.search-bar {
+  flex-basis: 80%;
+
+  input {
+    flex-grow: 1;
+  }
 }
