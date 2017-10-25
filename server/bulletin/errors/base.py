@@ -38,7 +38,7 @@ class ResourceIdName:
 
 class Error(Exception):
     def to_json(self):
-        return jsonify(ErrorSchema().dump(self).data)
+        return jsonify(ErrorSchema().dump(self).data), self.code
 
 
 # General Error classes to define code and message
@@ -100,7 +100,7 @@ class InternalServer(Error):
 
 
 @app.errorhandler(404)
-def page_not_found():
+def not_found(err):
     return NotFound().to_json()
 
 
