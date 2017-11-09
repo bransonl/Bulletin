@@ -1,8 +1,8 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-import LoginFormComponent from "./login-form.component";
-import SignupFormComponent from "./signup-form.component";
+import LoginFormComponent from "./loginForm.component";
+import SignupFormComponent from "./signupForm.component";
 import {clearError, ErrorAction} from "../../state/actions/error.action";
 
 import "./landing.component.scss";

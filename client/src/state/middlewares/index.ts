@@ -3,8 +3,8 @@ import {routerMiddleware} from "react-router-redux";
 import {createEpicMiddleware} from "redux-observable";
 
 import {history} from "../../routes";
-import authGuard from "./auth-guard.middleware";
-import routeGuard from "./route-guard.middleware";
+import authGuard from "./authGuard.middleware";
+import routeGuard from "./routeGuard.middleware";
 import rootEpic from "../epics";
 
 const router = routerMiddleware(history);

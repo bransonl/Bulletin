@@ -2,8 +2,8 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {reduxForm, InjectedFormProps} from "redux-form";
 
-import LabeledField from "../shared/labeled-field.component";
-import {LoginFormError, LoginFormErrors, LoginFormFields} from "./login-form.component";
+import LabeledField from "../shared/labeledField.component";
+import {LoginFormError, LoginFormErrors, LoginFormFields} from "./loginForm.component";
 import {signupRequest, UserAction} from "../../state/actions/user.action";
 import {clearError, ErrorAction} from "../../state/actions/error.action";
 

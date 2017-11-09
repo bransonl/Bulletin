@@ -2,9 +2,9 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {InjectedFormProps, reduxForm} from "redux-form";
 
-import ErrorMessage from "../shared/error-message.component";
+import ErrorMessage from "../shared/errorMessage.component";
 import {loginRequest, UserAction} from "../../state/actions/user.action";
-import LabeledField from "../shared/labeled-field.component";
+import LabeledField from "../shared/labeledField.component";
 import {clearError, ErrorAction} from "../../state/actions/error.action";
 
 const enum LoginFormError {
