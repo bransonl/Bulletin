@@ -1,11 +1,11 @@
 import {combineEpics} from "redux-observable";
 
-import {loginEpic, signupEpic, identifyEpic} from "./user.epic";
+import errorEpics from "./error.epic";
+import userEpics from "./user.epic";
 
 const rootEpic = combineEpics(
-  loginEpic,
-  signupEpic,
-  identifyEpic,
+  errorEpics,
+  userEpics,
 );
 
 export default rootEpic;

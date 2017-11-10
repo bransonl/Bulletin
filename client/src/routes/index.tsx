@@ -10,7 +10,7 @@ import LandingComponent from "../components/landing/landing.component";
 import {UserToken} from "../state/types/user.type";
 import {Redirect} from "react-router";
 
-enum AuthRequirement {
+const enum AuthRequirement {
   None,
   Authenticated,
   Unauthenticated,
