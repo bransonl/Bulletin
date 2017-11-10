@@ -8,7 +8,7 @@ import {clearError, ErrorAction} from "../../state/actions/error.action";
 import "./landing.component.scss";
 
 const enum PathNames {
-  LOGIN = "/",
+  LOGIN = "/login",
   SIGNUP = "/signup",
 }
 

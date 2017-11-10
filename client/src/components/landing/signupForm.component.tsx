@@ -58,7 +58,7 @@ class SignupFormComponent extends React.Component<SignupFormProps, {}> {
           props={{label: "Confirm Password"}}
         />
         <button type="submit" className="btn btn-primary btn-block">
-          Register
+          Sign Up
         </button>
       </form>
     );

@@ -6,7 +6,7 @@ import {clearUser} from "../actions/user.action";
 
 const authGuardMiddleware: Middleware = (store) => (next) => (action: AnyAction): any => {
   if (action.type === ErrorActionType.REQUEST_REJECTED && action.payload.code === 401) {
-    store.dispatch(push("/"));
+    store.dispatch(push("/login"));
     return next(clearUser());
   }
   return next(action);

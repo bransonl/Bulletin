@@ -23,12 +23,12 @@ const authenticatedRoute: React.SFC<ProtectedRouteProps> = (props: ProtectedRout
           if (isAuthenticated) {
             return <C {...props} {...componentProps} />;
           }
-          return <Redirect to="/" />;
+          return <Redirect to="/login" />;
         case AuthRequirement.Unauthenticated:
           if (!isAuthenticated) {
             return <C {...props} {...componentProps} />;
           }
-          return <Redirect to="/home" />;
+          return <Redirect to="/" />;
       }
     }}
   />

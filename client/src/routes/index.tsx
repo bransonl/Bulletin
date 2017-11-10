@@ -26,23 +26,22 @@ interface PropsFromState {
   user: UserToken | null;
 }
 
-
 const routes: {[routeName: string]: RouteInfo} = {
-  "/home": {
-    path: "/home",
-    component: HomeComponent,
-    authRequirement: AuthRequirement.Authenticated,
+  login: {
+    path: "/login",
+    component: LandingComponent,
+    authRequirement: AuthRequirement.Unauthenticated,
   },
-  "/register": {
+  register: {
     path: "/register",
     component: LandingComponent,
     authRequirement: AuthRequirement.Unauthenticated,
   },
-  "/": {
+  home: {
     path: "/",
-    component: LandingComponent,
-    authRequirement: AuthRequirement.Unauthenticated,
-  },
+    component: HomeComponent,
+    authRequirement: AuthRequirement.Authenticated,
+  }
 };
 
 const history = createHistory();
