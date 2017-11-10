@@ -16,14 +16,14 @@ const clearUser = (): UserAction => ({
   type: UserActionType.CLEAR_USER,
 });
 
-const loginRequest = (username: string, password: string): UserAction => ({
-  type: UserActionType.LOGIN_REQUEST,
-  payload: {username, password},
-});
-
 const identifyUser = (payload: any): UserAction => ({
   type: UserActionType.IDENTIFY_USER,
   payload,
+});
+
+const loginRequest = (username: string, password: string): UserAction => ({
+  type: UserActionType.LOGIN_REQUEST,
+  payload: {username, password},
 });
 
 const signupRequest = (username: string, password: string): UserAction => ({

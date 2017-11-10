@@ -6,6 +6,7 @@ import rootReducer from "./reducers";
 import middleware from "./middlewares";
 import {ErrorState} from "./reducers/error.reducer";
 import {UserState} from "./reducers/user.reducer";
+import localStorage from "./localStorage";
 
 interface RootState {
   router: RouterState;
@@ -14,7 +15,16 @@ interface RootState {
   user: UserState;
 }
 
-const store: Store<RootState> = createStore<RootState>(rootReducer, middleware);
+const persistedState: RootState = {
+  router: undefined,
+  form: undefined,
+  error: undefined,
+  user: localStorage.getItem("user"),
+};
+
+const store: Store<RootState> = createStore<RootState>(
+  rootReducer, persistedState, middleware
+);
 
 export {RootState};
 export default store;

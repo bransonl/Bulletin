@@ -5,10 +5,12 @@ import {Observable} from "rxjs/Rx";
 
 import env from "../../env/env";
 import store from "../index";
+import localStorage from "../localStorage";
 import {
   identifyUser, UserAction, UserActionType,
 } from "../actions/user.action";
 import {formRequestRejected, requestRejected} from "../actions/error.action";
+import nullAction from "../actions/null.action";
 
 const loginEpic = (action$: ActionsObservable<UserAction>) => (
   action$
@@ -24,7 +26,7 @@ const loginEpic = (action$: ActionsObservable<UserAction>) => (
           "Content-Type": "application/json",
         },
       })
-        .do(() => store.dispatch(push("/home")))
+        .do((res) => localStorage.setItem("user", res.xhr.response.data))
         .map((res) => identifyUser(res.xhr.response.data))
         .catch((err) =>
           Observable.of(requestRejected(err.xhr.response)));
@@ -45,11 +47,18 @@ const signupEpic = (action$: ActionsObservable<UserAction>) => (
           "Content-Type": "application/json",
         },
       })
-        .do(() => store.dispatch(push("/home")))
+        .do((res) => localStorage.setItem("user", res.xhr.response.data))
         .map((res) => identifyUser(res.xhr.response.data))
         .catch((err) =>
           Observable.of(formRequestRejected(err.xhr.response)));
     })
 );
 
-export {loginEpic, signupEpic};
+const identifyEpic = (action$: ActionsObservable<UserAction>) => (
+  action$
+    .ofType(UserActionType.IDENTIFY_USER)
+    .do(() => store.dispatch(push("/home")))
+    .mapTo(nullAction())
+);
+
+export {loginEpic, signupEpic, identifyEpic};
