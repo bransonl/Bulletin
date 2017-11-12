@@ -1,16 +1,26 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
+import {clearUser, UserAction} from "../../state/actions/user.action";
 import HeaderComponent from "./header.component";
 
-class HomeComponent extends React.Component {
+interface PropsFromDispatch {
+  clearUser: () => UserAction;
+}
+
+type HomeProps = PropsFromDispatch;
+
+class HomeComponent extends React.Component<HomeProps, {}> {
   public render() {
     return (
       <div>
-        <HeaderComponent />
+        <HeaderComponent onLogout={this.props.clearUser} />
       </div>
     );
   }
 }
 
-export default HomeComponent;
+export default connect<null, PropsFromDispatch>(
+  null,
+  {clearUser}
+)(HomeComponent);

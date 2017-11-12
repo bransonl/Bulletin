@@ -1,8 +1,13 @@
 import * as React from "react";
 
 import "./header.component.scss";
+import {UserAction} from "../../state/actions/user.action";
 
-class HeaderComponent extends React.Component {
+interface HeaderProps {
+  onLogout: () => UserAction;
+}
+
+class HeaderComponent extends React.Component<HeaderProps, {}> {
   public render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -27,6 +32,8 @@ class HeaderComponent extends React.Component {
           </form>
           <ul className="navbar-nav justify-content-end ml-auto">
           </ul>
+
+          <button type="button" className="btn btn-light pull-right" onClick={this.props.onLogout}>Logout</button>
         </div>
       </nav>
     );
