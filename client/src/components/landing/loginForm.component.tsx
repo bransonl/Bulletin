@@ -84,4 +84,7 @@ export {LoginFormError, LoginFormFields, LoginFormErrors};
 export default reduxForm({
   form: "LoginForm",
   validate,
-})(connect<null, PropsFromDispatch>(null, {clearError, loginRequest})(LoginFormComponent));
+})(connect<null, PropsFromDispatch>(
+  null,
+  {clearError, loginRequest}
+)(LoginFormComponent));

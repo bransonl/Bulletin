@@ -56,4 +56,7 @@ function mapStateToProps({error}: {error: Error}): PropsFromState {
   return {error};
 }
 
-export default connect<PropsFromState, PropsFromDispatch, PassedProps>(mapStateToProps, {clearError})(ErrorMessage);
+export default connect<PropsFromState, PropsFromDispatch, PassedProps>(
+  mapStateToProps,
+  {clearError}
+)(ErrorMessage);

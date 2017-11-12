@@ -26,4 +26,7 @@ function mapStateToProps({error}: {error: FieldError}) {
   return {error};
 }
 
-export default connect<PropsFromState, null, PassedProps>(mapStateToProps, null)(FieldErrorMessage);
+export default connect<PropsFromState, null, PassedProps>(
+  mapStateToProps,
+  null
+)(FieldErrorMessage);

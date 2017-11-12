@@ -91,4 +91,7 @@ function validate(fields: SignupFormFields): SignupFormErrors {
 export default reduxForm({
   form: "SignupForm",
   validate,
-})(connect<null, PropsFromDispatch>(null, {clearError, signupRequest})(SignupFormComponent));
+})(connect<null, PropsFromDispatch>(
+  null,
+  {clearError, signupRequest}
+)(SignupFormComponent));
