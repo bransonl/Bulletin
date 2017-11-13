@@ -4,6 +4,7 @@ import {Field, WrappedFieldProps} from "redux-form";
 import FieldErrorMessage from "./fieldErrorMessage.component";
 
 interface LabeledFieldProps extends WrappedFieldProps {
+  disabled?: boolean;
   label?: string;
   type?: string;
 }
@@ -25,13 +26,18 @@ function renderField(field: LabeledFieldProps) {
   return (
     <div className={className}>
       <label>{field.label}</label>
-      <input type={field.type} className="form-control" {...field.input} />
+      <input
+        type={field.type}
+        className="form-control"
+        disabled={field.disabled}
+        {...field.input} />
       {renderError(field)}
     </div>
   );
 }
 
-const LabeledField = (props: any) => (
+// TODO: figure out typing
+const LabeledField: React.SFC<any> = (props) => (
   <Field
     {...props}
     component={renderField as any}

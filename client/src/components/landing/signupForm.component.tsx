@@ -25,50 +25,53 @@ interface PropsFromDispatch {
   signupRequest: (username: string, password: string) => UserAction;
 }
 
-type SignupFormProps = InjectedFormProps & PropsFromDispatch;
-
-class SignupFormComponent extends React.Component<SignupFormProps, {}> {
-  constructor(props: SignupFormProps) {
-    super(props);
-
-    this.onSubmit = this.onSubmit.bind(this);
-  }
-
-  public render() {
-    const {handleSubmit} = this.props;
-
-    return (
-      <form onSubmit={handleSubmit(this.onSubmit)}>
-        <LabeledField
-          type="text"
-          name="username"
-          placeholder="Username"
-          props={{label: "Username"}}
-        />
-        <LabeledField
-          type="password"
-          name="password"
-          placeholder="Password"
-          props={{label: "Password"}}
-        />
-        <LabeledField
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirm Password"
-          props={{label: "Confirm Password"}}
-        />
-        <button type="submit" className="btn btn-primary btn-block">
-          Sign Up
-        </button>
-      </form>
-    );
-  }
-
-  protected onSubmit(values: SignupFormFields): void {
-    this.props.clearError();
-    this.props.signupRequest(values.username, values.password);
-  }
+interface OwnProps {
+  disabled?: boolean;
 }
+
+type SignupFormProps =
+  InjectedFormProps
+  & PropsFromDispatch
+  & OwnProps;
+
+const SignupFormComponent: React.SFC<SignupFormProps> = (props) => {
+  const {handleSubmit} = props;
+
+  const onSubmit = (values: SignupFormFields) => {
+    props.clearError();
+    props.signupRequest(values.username, values.password);
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <LabeledField
+        type="text"
+        name="username"
+        placeholder="Username"
+        props={{label: "Username", disabled: props.disabled}}
+      />
+      <LabeledField
+        type="password"
+        name="password"
+        placeholder="Password"
+        props={{label: "Password", disabled: props.disabled}}
+      />
+      <LabeledField
+        type="password"
+        name="confirmPassword"
+        placeholder="Confirm Password"
+        props={{label: "Confirm Password", disabled: props.disabled}}
+      />
+      <button
+        type="submit"
+        className="btn btn-primary btn-block"
+        disabled={props.disabled}
+      >
+        Sign Up
+      </button>
+    </form>
+  )
+};
 
 function validate(fields: SignupFormFields): SignupFormErrors {
   const errors: SignupFormErrors = {};
@@ -88,10 +91,10 @@ function validate(fields: SignupFormFields): SignupFormErrors {
   return errors;
 }
 
-export default reduxForm({
-  form: "SignupForm",
-  validate,
-})(connect<null, PropsFromDispatch>(
+export default connect<null, PropsFromDispatch, OwnProps>(
   null,
   {clearError, signupRequest}
-)(SignupFormComponent));
+)(reduxForm<SignupFormFields>({
+  form: "SignupForm",
+  validate,
+})(SignupFormComponent) as any);

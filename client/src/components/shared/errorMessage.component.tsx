@@ -12,11 +12,14 @@ interface PropsFromDispatch {
   clearError: () => ErrorAction;
 }
 
-interface PassedProps {
+interface OwnProps {
   dismissible?: boolean;
 }
 
-type ErrorMessageProps = PropsFromState & PropsFromDispatch & PassedProps;
+type ErrorMessageProps =
+  PropsFromState &
+  PropsFromDispatch &
+  OwnProps;
 
 function renderDismissButton(props: ErrorMessageProps) {
   // check if false to "default" to true if not explicitly false
@@ -52,11 +55,11 @@ const ErrorMessage: React.SFC<ErrorMessageProps> = (props) => {
   return null;
 };
 
-function mapStateToProps({error}: {error: Error}): PropsFromState {
+function mapStateToProps({error}: PropsFromState): PropsFromState {
   return {error};
 }
 
-export default connect<PropsFromState, PropsFromDispatch, PassedProps>(
+export default connect<PropsFromState, PropsFromDispatch, OwnProps>(
   mapStateToProps,
   {clearError}
 )(ErrorMessage);

@@ -7,11 +7,13 @@ interface PropsFromState {
   error: FieldError;
 }
 
-interface PassedProps {
+interface OwnProps {
   field: string;
 }
 
-type FieldErrorMessageProps = PropsFromState & PassedProps;
+type FieldErrorMessageProps =
+  PropsFromState
+  & OwnProps;
 
 const FieldErrorMessage: React.SFC<FieldErrorMessageProps> = (props) => {
   const {error, field} = props;
@@ -26,7 +28,7 @@ function mapStateToProps({error}: {error: FieldError}) {
   return {error};
 }
 
-export default connect<PropsFromState, null, PassedProps>(
+export default connect<PropsFromState, null, OwnProps>(
   mapStateToProps,
   null
 )(FieldErrorMessage);

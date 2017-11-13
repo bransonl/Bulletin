@@ -71,7 +71,9 @@ const Router: React.SFC<PropsFromState> = ({user}) => (
   </ConnectedRouter>
 );
 
-const mapStateToProps = ({user}: {user: UserToken | null}) => ({user});
+function mapStateToProps ({user}: {user: UserToken | null}) {
+  return {user}
+}
 
 export {AuthRequirement, history, routes};
 export default connect<PropsFromState, null>(mapStateToProps, null)(Router);

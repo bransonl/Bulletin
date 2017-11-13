@@ -4,4 +4,4 @@ interface NullAction {
 
 const nullAction = (): NullAction => ({type: null});
 
-export default nullAction;
+export {nullAction};

@@ -6,6 +6,7 @@ import SignupFormComponent from "./signupForm.component";
 import {clearError, ErrorAction} from "../../state/actions/error.action";
 
 import "./landing.component.scss";
+import {RouteComponentProps} from "react-router";
 
 const enum PathNames {
   LOGIN = "/login",
@@ -17,15 +18,24 @@ const enum FormType {
   SIGNUP = "signup",
 }
 
+interface PropsFromState {
+  isLoading: boolean;
+}
+
 interface PropsFromDispatch {
   clearError: () => ErrorAction;
 }
 
-interface State {
+type LandingProps =
+  RouteComponentProps<null>
+  & PropsFromState
+  & PropsFromDispatch;
+
+interface LandingState {
   formShown: FormType;
 }
 
-class LandingComponent extends React.Component<PropsFromDispatch, State> {
+class LandingComponent extends React.Component<LandingProps, LandingState> {
   constructor(props: any) {
     super(props);
 
@@ -52,6 +62,7 @@ class LandingComponent extends React.Component<PropsFromDispatch, State> {
             type="button"
             className="btn btn-primary btn-block my-3"
             onClick={this.toggleFormType.bind(this)}
+            disabled={this.props.isLoading}
           >
             {formChangeButtonText}
           </button>
@@ -66,9 +77,9 @@ class LandingComponent extends React.Component<PropsFromDispatch, State> {
     }
 
     if (this.state.formShown === FormType.LOGIN) {
-      return <LoginFormComponent />;
+      return <LoginFormComponent disabled={this.props.isLoading} />;
     } else if (this.state.formShown === FormType.SIGNUP) {
-      return <SignupFormComponent />;
+      return <SignupFormComponent disabled={this.props.isLoading} />;
     }
   }
 
@@ -90,7 +101,11 @@ class LandingComponent extends React.Component<PropsFromDispatch, State> {
   }
 }
 
-export default connect<null, PropsFromDispatch>(
-  null,
+function mapStateToProps({isLoading}: PropsFromState): PropsFromState {
+  return {isLoading}
+}
+
+export default connect<PropsFromState, PropsFromDispatch>(
+  mapStateToProps,
   {clearError}
 )(LandingComponent);
