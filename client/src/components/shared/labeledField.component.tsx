@@ -19,7 +19,7 @@ function renderError(field: WrappedFieldProps) {
   }
 }
 
-function renderField(field: LabeledFieldProps) {
+const FieldComponent: React.SFC<LabeledFieldProps> = (field) => {
   const {meta: {touched, error}} = field;
   const className = `form-group ${touched && error ? "has-danger" : ""}`;
 
@@ -34,13 +34,13 @@ function renderField(field: LabeledFieldProps) {
       {renderError(field)}
     </div>
   );
-}
+};
 
 // TODO: figure out typing
 const LabeledField: React.SFC<any> = (props) => (
   <Field
     {...props}
-    component={renderField as any}
+    component={FieldComponent}
   />
 );
 

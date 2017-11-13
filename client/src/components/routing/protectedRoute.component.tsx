@@ -13,25 +13,27 @@ interface ProtectedRouteProps extends RouteProps {
 
 const authenticatedRoute: React.SFC<ProtectedRouteProps> = (props: ProtectedRouteProps) => {
   const {authRequirement, isAuthenticated, component: C, componentProps, ...rest} = props;
-  return <Route
-    {...rest}
-    render={(props) => {
-      switch(authRequirement) {
-        case AuthRequirement.None:
-          return <C {...props} {...componentProps} />;
-        case AuthRequirement.Authenticated:
-          if (isAuthenticated) {
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        switch(authRequirement) {
+          case AuthRequirement.None:
             return <C {...props} {...componentProps} />;
-          }
-          return <Redirect to="/login" />;
-        case AuthRequirement.Unauthenticated:
-          if (!isAuthenticated) {
-            return <C {...props} {...componentProps} />;
-          }
-          return <Redirect to="/" />;
-      }
-    }}
-  />
+          case AuthRequirement.Authenticated:
+            if (isAuthenticated) {
+              return <C {...props} {...componentProps} />;
+            }
+            return <Redirect to="/login" />;
+          case AuthRequirement.Unauthenticated:
+            if (!isAuthenticated) {
+              return <C {...props} {...componentProps} />;
+            }
+            return <Redirect to="/" />;
+        }
+      }}
+    />
+  );
 };
 
 export default authenticatedRoute;

@@ -21,7 +21,7 @@ type ErrorMessageProps =
   PropsFromDispatch &
   OwnProps;
 
-function renderDismissButton(props: ErrorMessageProps) {
+const DismissButtonComponent: React.SFC<ErrorMessageProps> = (props) => {
   // check if false to "default" to true if not explicitly false
   if (props.dismissible === false) {
     return null;
@@ -38,7 +38,7 @@ function renderDismissButton(props: ErrorMessageProps) {
       </button>
     );
   }
-}
+};
 
 const ErrorMessage: React.SFC<ErrorMessageProps> = (props) => {
   const {dismissible, error} = props;
@@ -47,7 +47,7 @@ const ErrorMessage: React.SFC<ErrorMessageProps> = (props) => {
     const className = `alert alert-danger${dismissible ? " alert-dismissible fade show" : ""}`;
     return (
       <div className={className} role="alert">
-        {renderDismissButton(props)}
+        <DismissButtonComponent {...props} />
         {error.message}
       </div>
     );
