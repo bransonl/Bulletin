@@ -4,7 +4,7 @@ import "./header.component.scss";
 import {UserAction} from "../../state/actions/user.action";
 
 interface HeaderProps {
-  onLogout: () => UserAction;
+  logout: () => UserAction;
 }
 
 const HeaderComponent: React.SFC<HeaderProps> = (props) => (
@@ -29,9 +29,8 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
         <button type="submit" className="btn btn-outline-success my-2 my-sm-0">Search</button>
       </form>
       <ul className="navbar-nav justify-content-end ml-auto">
+        <button type="button" className="btn btn-light" onClick={props.logout}>Logout</button>
       </ul>
-
-      <button type="button" className="btn btn-light pull-right" onClick={props.onLogout}>Logout</button>
     </div>
   </nav>
 );

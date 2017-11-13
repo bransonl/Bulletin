@@ -14,7 +14,7 @@ class HomeComponent extends React.Component<HomeProps, {}> {
   public render() {
     return (
       <div>
-        <HeaderComponent onLogout={this.props.clearUser} />
+        <HeaderComponent logout={this.props.clearUser} />
       </div>
     );
   }
