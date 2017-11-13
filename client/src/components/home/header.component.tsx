@@ -24,10 +24,13 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
     </button>
 
     <div className="collapse navbar-collapse" id="navbarContent">
-      <form className="form-inline my-2 my-lg-0 search-bar">
+      {
+        // TODO: uncomment this when ready
+        /*<form className="form-inline my-2 my-lg-0 search-bar">
         <input type="text" className="form-control mr-sm-2" placeholder="Search" aria-label="Search"/>
         <button type="submit" className="btn btn-outline-success my-2 my-sm-0">Search</button>
-      </form>
+        </form>*/
+      }
       <ul className="navbar-nav justify-content-end ml-auto">
         <button type="button" className="btn btn-light" onClick={props.logout}>Logout</button>
       </ul>
