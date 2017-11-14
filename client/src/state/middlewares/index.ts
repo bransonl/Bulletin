@@ -2,7 +2,7 @@ import {applyMiddleware} from "redux";
 import {routerMiddleware} from "react-router-redux";
 import {createEpicMiddleware} from "redux-observable";
 
-import {history} from "../../routes";
+import {history} from "../../router";
 import rootEpic from "../epics";
 
 const router = routerMiddleware(history);

@@ -2,7 +2,7 @@ import * as React from "react";
 import {RouteProps} from "react-router";
 import {Redirect, Route} from "react-router-dom";
 
-import {AuthRequirement} from "../../routes/index";
+import {AuthRequirement} from "../../router";
 
 interface ProtectedRouteProps extends RouteProps {
   authRequirement: AuthRequirement,
@@ -11,7 +11,7 @@ interface ProtectedRouteProps extends RouteProps {
   componentProps?: any
 }
 
-const authenticatedRoute: React.SFC<ProtectedRouteProps> = (props: ProtectedRouteProps) => {
+const ProtectedRoute: React.SFC<ProtectedRouteProps> = (props: ProtectedRouteProps) => {
   const {authRequirement, isAuthenticated, component: C, componentProps, ...rest} = props;
   return (
     <Route
@@ -36,4 +36,4 @@ const authenticatedRoute: React.SFC<ProtectedRouteProps> = (props: ProtectedRout
   );
 };
 
-export default authenticatedRoute;
+export default ProtectedRoute;
