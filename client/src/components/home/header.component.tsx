@@ -1,6 +1,5 @@
 import * as React from "react";
 
-import "./header.component.scss";
 import {UserAction} from "../../state/actions/user.action";
 
 interface HeaderProps {

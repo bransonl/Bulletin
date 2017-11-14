@@ -12,7 +12,7 @@ import "bootstrap/js/src/util";
 import "bootstrap/js/src/alert";
 import "bootstrap/js/src/collapse";
 
-import Router from "./components/router/router.component";
+import Router from "./router";
 import store from "./state";
 
 const rootElement = document.getElementById("root");
@@ -31,9 +31,14 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept("./components/router/router.component", () => {
-    const NextRouter = require("./components/router/router.component").default;
-    ReactDOM.render(NextRouter, rootElement);
+  module.hot.accept("./router", () => {
+    const NextRouter = require("./router").default;
+    ReactDOM.render(
+      <AppContainer>
+        <Provider store={store}>
+          <NextRouter />
+        </Provider>
+      </AppContainer>,
+      rootElement);
   });
-
 }

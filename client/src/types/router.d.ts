@@ -1,5 +1,6 @@
 import {ComponentType} from "react";
-import {AuthRequirement} from "../router/index";
+
+import {AuthRequirement} from "../router";
 
 interface RouteInfo {
   path: string;
