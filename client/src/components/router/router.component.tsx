@@ -4,8 +4,9 @@ import {Route} from "react-router";
 import {Redirect, Switch} from "react-router-dom";
 import {ConnectedRouter} from "react-router-redux";
 
-import {AuthRequirement, history, RouteInfo, routes} from "../../router";
-import {UserToken} from "../../state/types/user.type";
+import {AuthRequirement, history, routes} from "../../router";
+import {UserToken} from "../../types/user";
+import {RouteInfo} from "../../types/router";
 import ProtectedRoute from "./protectedRoute.component";
 
 interface PropsFromState {

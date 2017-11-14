@@ -1,4 +1,4 @@
-import {UserCredentials, UserToken} from "../types/user.type";
+import {UserCredentials, UserToken} from "../../types/user";
 
 const enum UserActionType {
   CLEAR_USER = "clear_user",

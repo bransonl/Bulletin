@@ -1,4 +1,4 @@
-import {Error, FieldError} from "../types/error.type";
+import {Error, FieldError} from "../../types/error";
 
 const enum ErrorActionType {
   CLEAR_ERROR = "clear_error",

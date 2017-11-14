@@ -1,5 +1,5 @@
 import {UserAction, UserActionType} from "../actions/user.action";
-import {UserCredentials, UserToken} from "../types/user.type";
+import {UserCredentials, UserToken} from "../../types/user";
 
 type UserState = UserCredentials | UserToken | null;
 

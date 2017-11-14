@@ -1,7 +1,7 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-import {FieldError} from "../../state/types/error.type";
+import {FieldError} from "../../types/error";
 
 interface PropsFromState {
   error: FieldError;

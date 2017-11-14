@@ -1,5 +1,5 @@
 import {ErrorAction, ErrorActionType} from "../actions/error.action";
-import {Error, FieldError} from "../types/error.type";
+import {Error, FieldError} from "../../types/error";
 
 type ErrorState = Error | FieldError;
 
