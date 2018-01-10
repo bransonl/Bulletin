@@ -1,8 +1,8 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {FormProps, InjectedFormProps, reduxForm} from "redux-form";
+import {InjectedFormProps, reduxForm} from "redux-form";
 
-import ErrorMessage from "../shared/errorMessage.component";
+import ErrorMessage from "../shared/error/errorMessage.component";
 import {loginRequest, UserAction} from "../../state/actions/user.action";
 import LabeledField from "../shared/labeledField.component";
 import {clearError, ErrorAction} from "../../state/actions/error.action";

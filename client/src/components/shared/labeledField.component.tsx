@@ -1,7 +1,7 @@
 import * as React from "react";
 import {Field, WrappedFieldProps} from "redux-form";
 
-import FieldErrorMessage from "./fieldErrorMessage.component";
+import FieldErrorMessage from "./error/fieldErrorMessage.component";
 
 interface LabeledFieldProps extends WrappedFieldProps {
   disabled?: boolean;
