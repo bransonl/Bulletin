@@ -31,7 +31,9 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
         </form>*/
       }
       <ul className="navbar-nav justify-content-end ml-auto">
-        <button type="button" className="btn btn-light" onClick={props.logout}>Logout</button>
+        <button type="button" className="btn btn-light" onClick={props.logout}>
+          Log Out
+        </button>
       </ul>
     </div>
   </nav>
