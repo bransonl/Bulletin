@@ -79,10 +79,6 @@ const config: webpack.Configuration = {
           "url-loader",
         ],
       },
-      {
-        test: /bootstrap\/dist\/js\/umd\//,
-        use: "imports-loader?jQuery=jquery",
-      },
     ],
   },
   plugins: [
@@ -99,9 +95,6 @@ const config: webpack.Configuration = {
       "jQuery": "jquery",
       "window.jQuery": "jquery",
       "Popper": ["popper.js", "default"],
-      Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
-      Collapse: "exports-loader?Collapse!boostrap/js/dist/collapse",
-      Util: "exports-loader?Util!bootstrap/js/dist/util",
     }),
   ],
   devtool: "eval",
