@@ -38,6 +38,7 @@ const config: webpack.Configuration = {
       {
         test: /\.js$/,
         use: "source-map-loader",
+        exclude: path.resolve(__dirname, "node_modules"),
         enforce: "pre",
       },
       {
@@ -52,6 +53,17 @@ const config: webpack.Configuration = {
         use: [
           "style-loader",
           "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: function() {
+                return [
+                  require("precss"),
+                  require("autoprefixer")
+                ];
+              }
+            }
+          },
           "sass-loader",
         ],
       },
@@ -66,6 +78,10 @@ const config: webpack.Configuration = {
         use: [
           "url-loader",
         ],
+      },
+      {
+        test: /bootstrap\/dist\/js\/umd\//,
+        use: "imports-loader?jQuery=jquery",
       },
     ],
   },
@@ -83,6 +99,9 @@ const config: webpack.Configuration = {
       "jQuery": "jquery",
       "window.jQuery": "jquery",
       "Popper": ["popper.js", "default"],
+      Alert: "exports-loader?Alert!bootstrap/js/dist/alert",
+      Collapse: "exports-loader?Collapse!boostrap/js/dist/collapse",
+      Util: "exports-loader?Util!bootstrap/js/dist/util",
     }),
   ],
   devtool: "eval",
