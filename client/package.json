@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bootstrap": "^3.3.36",
     "@types/html-webpack-plugin": "^2.28.0",
+    "@types/jquery": "^3.2.17",
     "@types/node": "^8.0.51",
     "@types/react": "^16.0.22",
     "@types/react-dom": "^16.0.3",
@@ -43,15 +45,16 @@
     "webpack-dev-server": "^2.9.4"
   },
   "dependencies": {
+    "@types/react-icons": "^2.2.4",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.0.0-beta.2",
-    "font-awesome": "^4.7.0",
     "history": "^4.7.2",
     "jquery": "^3.2.1",
     "node-sass": "^4.6.1",
     "popper.js": "^1.12.7",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
+    "react-icons": "^2.2.7",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^5.0.0-alpha.8",

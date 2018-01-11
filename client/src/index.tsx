@@ -4,13 +4,12 @@ import {AppContainer} from "react-hot-loader";
 import {Provider} from "react-redux";
 import "rxjs";
 
-import "bootstrap/scss/bootstrap.scss"; // Bootstrap styles
-import "./stylesheets/styles.scss"; // Style overrides
-
 // Bootstrap imports
-import "exports-loader?bootstrap/js/dist/alert"; // Alert
-import "exports-loader?bootstrap/js/dist/dropdown"; // Dropdown
-import "exports-loader?bootstrap/js/dist/Util"; // Util
+// TODO: only import used plugins
+import "bootstrap";
+
+import "bootstrap/scss/bootstrap.scss"; // Bootstrap styles
+import "./stylesheets/styles.scss"; // Global styles
 
 import Router from "./router";
 import store from "./state";
