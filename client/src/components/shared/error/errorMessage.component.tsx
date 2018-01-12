@@ -13,7 +13,7 @@ interface PropsFromDispatch {
 }
 
 interface OwnProps {
-  dismissible?: boolean;
+  dismissible?: boolean; // default: true
 }
 
 type ErrorMessageProps =
@@ -22,7 +22,6 @@ type ErrorMessageProps =
   OwnProps;
 
 function renderDismissButton(dismissible: boolean, action: any) {
-  // check if false to "default" to true if not explicitly false
   if (dismissible) {
     return (
       <button
@@ -40,7 +39,7 @@ function renderDismissButton(dismissible: boolean, action: any) {
 }
 
 const ErrorMessage: React.SFC<ErrorMessageProps> = (props) => {
-  const {dismissible, error} = props;
+  const {dismissible = true, error} = props;
 
   if (error && error.code && error.message) {
     const className = `alert alert-danger${dismissible ? " alert-dismissible fade show" : ""}`;
