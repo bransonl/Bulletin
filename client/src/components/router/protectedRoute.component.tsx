@@ -15,18 +15,18 @@ const ProtectedRoute: React.SFC<ProtectedRouteProps> = (props: ProtectedRoutePro
   return (
     <Route
       {...rest}
-      render={(props) => {
+      render={(componentProps) => {
         switch(authRequirement) {
           case AuthRequirement.None:
-            return <C {...rest} />;
+            return <C {...componentProps} />;
           case AuthRequirement.Authenticated:
             if (isAuthenticated) {
-              return <C {...rest} />;
+              return <C {...componentProps} />;
             }
             return <Redirect to="/login" />;
           case AuthRequirement.Unauthenticated:
             if (!isAuthenticated) {
-              return <C {...rest} />;
+              return <C {...componentProps} />;
             }
             return <Redirect to="/" />;
         }
