@@ -1,4 +1,5 @@
 import * as React from "react";
+import {Link} from "react-router-dom";
 
 import {MdDashboard, MdSettings} from "react-icons/lib/md";
 
@@ -10,7 +11,7 @@ interface HeaderProps {
 
 const HeaderComponent: React.SFC<HeaderProps> = (props) => (
   <nav className="navbar navbar-expand-lg navbar-light bg-light">
-    <a className="navbar-brand" href="#">Bulletin</a>
+    <Link className="navbar-brand" to="/">Bulletin</Link>
     <ul className="navbar-nav justify-content-end ml-auto">
       <div className="dropdown">
         <button
@@ -27,8 +28,8 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
           className="dropdown-menu dropdown-menu-right"
           aria-labelledby="board-dropdown-button"
         >
-          <a className="dropdown-item" href="javascript:void(0)">Create board</a>
-          <a className="dropdown-item" href="javascript:void(0)">Manage boards</a>
+          <Link className="dropdown-item" to="/boards/create">Create board</Link>
+          <Link className="dropdown-item" to="/boards">Manage boards</Link>
         </div>
       </div>
       <div className="dropdown show">
