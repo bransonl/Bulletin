@@ -28,7 +28,7 @@ const routes: RouteInfo[] = [
     authRequirement: AuthRequirement.Unauthenticated,
   },
   {
-    path: "/register",
+    path: "/signup",
     component: LandingComponent,
     authRequirement: AuthRequirement.Unauthenticated,
   },
