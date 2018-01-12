@@ -10,7 +10,10 @@ import {RouteInfo} from "../types/router";
 import ProtectedRoute from "../components/router/protectedRoute.component";
 import LandingComponent from "../components/landing/landing.component";
 import HomeComponent from "../components/home/home.component";
+import BoardsComponent from "../components/boards/boards.component";
 
+// Top level routes
+// Sub-routes are handled in each top-level route
 
 const enum AuthRequirement {
   None,
@@ -31,9 +34,10 @@ const routes: RouteInfo[] = [
   },
   {
     path: "/",
+    exact: true,
     component: HomeComponent,
     authRequirement: AuthRequirement.Authenticated,
-  }
+  },
 ];
 
 interface PropsFromState {
@@ -41,20 +45,20 @@ interface PropsFromState {
 }
 
 function renderRoute(isAuthenticated: boolean) {
-  return function({path, component, authRequirement}: RouteInfo) {
+  return function({path, exact = false, component, authRequirement}: RouteInfo) {
     if (authRequirement !== AuthRequirement.None) {
       return (
         <ProtectedRoute
           key={path}
-          exact
           path={path}
+          exact={exact}
           authRequirement={authRequirement}
           isAuthenticated={isAuthenticated}
           component={component}
         />
       );
     }
-    return <Route key={path} exact path={path} component={component} />;
+    return <Route key={path} path={path} exact={exact} component={component} />;
   };
 }
 
