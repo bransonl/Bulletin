@@ -22,5 +22,5 @@ class HomeComponent extends React.Component<HomeProps, {}> {
 
 export default connect<null, PropsFromDispatch>(
   null,
-  {clearUser}
+  {clearUser},
 )(HomeComponent);

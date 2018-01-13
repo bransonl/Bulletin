@@ -1,5 +1,5 @@
 interface NullAction {
-  type: null,
+  type: null;
 }
 
 const nullAction = (): NullAction => ({type: null});

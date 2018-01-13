@@ -11,15 +11,15 @@ interface PropsFromDispatch {
 
 type BoardsProps = PropsFromDispatch & RouteComponentProps<null>;
 
-const BoardsComponent: React.SFC<BoardsProps> = ({clearUser, match}) => {
+const BoardsComponent: React.SFC<BoardsProps> = ({clearUser: logout, match}) => {
   return (
     <div>
-      <HeaderComponent logout={clearUser} />
+      <HeaderComponent logout={logout} />
     </div>
   );
 };
 
 export default connect<null, PropsFromDispatch>(
   null,
-  {clearUser}
+  {clearUser},
 )(BoardsComponent);

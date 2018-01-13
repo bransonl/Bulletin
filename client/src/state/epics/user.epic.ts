@@ -8,19 +8,17 @@ import store from "../index";
 import localStorage from "../localStorage";
 import {identifyUser, UserAction, UserActionType} from "../actions/user.action";
 import {
-  ErrorAction, formRequestRejected,
-  requestRejected
+  ErrorAction, formRequestRejected, requestRejected,
 } from "../actions/error.action";
 import {nullAction} from "../actions/null.action";
 import {
-  hideLoading, LoadingAction,
-  showLoading
+  hideLoading, LoadingAction, showLoading,
 } from "../actions/loading.action";
 
 const clearUserEpic = (action$: ActionsObservable<UserAction>) => (
   action$
     .ofType(UserActionType.CLEAR_USER)
-    .do((action: UserAction) => localStorage.setItem("user", null))
+    .do(() => localStorage.setItem("user", null))
     .do(() => store.dispatch(push("/login")))
     .mapTo(nullAction())
 );
@@ -61,7 +59,7 @@ const loginEpic = (action$: ActionsObservable<UserAction>):
                 hideLoading(),
               ])),
         )
-          .mergeAll()
+          .mergeAll();
       })
   );
 
@@ -93,7 +91,7 @@ const signupEpic = (action$: ActionsObservable<UserAction>):
                 hideLoading(),
               ])),
         )
-          .mergeAll()
+          .mergeAll();
       })
   );
 

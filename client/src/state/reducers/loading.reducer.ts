@@ -5,7 +5,7 @@ type LoadingState = boolean;
 const defaultState = false;
 
 const isLoading = (state: LoadingState = defaultState, action: LoadingAction): LoadingState => {
-  switch(action.type) {
+  switch (action.type) {
     case LoadingActionType.SHOW_LOADING:
       return true;
     case LoadingActionType.HIDE_LOADING:

@@ -30,5 +30,5 @@ function mapStateToProps({error}: {error: FieldError}) {
 
 export default connect<PropsFromState, null, OwnProps>(
   mapStateToProps,
-  null
+  null,
 )(FieldErrorMessage);

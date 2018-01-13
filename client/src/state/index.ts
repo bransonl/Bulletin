@@ -26,7 +26,7 @@ const persistedState: RootState = {
 };
 
 const store: Store<RootState> = createStore<RootState>(
-  rootReducer, persistedState, middleware
+  rootReducer, persistedState, middleware,
 );
 
 export {RootState};

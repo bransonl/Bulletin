@@ -50,7 +50,7 @@ interface PropsFromState {
 }
 
 function renderRoute(isAuthenticated: boolean) {
-  return function({path, exact = false, component, authRequirement}: RouteInfo) {
+  return ({path, exact = false, component, authRequirement}: RouteInfo) => {
     if (authRequirement !== AuthRequirement.None) {
       return (
         <ProtectedRoute
@@ -67,21 +67,23 @@ function renderRoute(isAuthenticated: boolean) {
   };
 }
 
+const redirect = () => <Redirect to="/" />;
+
 class Router extends React.Component<PropsFromState, {}> {
   public render() {
     return (
       <ConnectedRouter history={history}>
         <Switch>
           {routes.map(renderRoute(this.props.isAuthenticated))}
-          <Route path="/*" render={() => <Redirect to="/" />} />
+          <Route path="/*" render={redirect} />
         </Switch>
       </ConnectedRouter>
-    )
+    );
   }
 }
 
-function mapStateToProps ({user}: {user: UserToken | null}) {
-  return {isAuthenticated: user !== null}
+function mapStateToProps({user}: {user: UserToken | null}) {
+  return {isAuthenticated: user !== null};
 }
 
 export {AuthRequirement};

@@ -30,7 +30,8 @@ const FieldComponent: React.SFC<LabeledFieldProps> = (field) => {
         type={field.type}
         className="form-control"
         disabled={field.disabled}
-        {...field.input} />
+        {...field.input}
+      />
       {renderError(field)}
     </div>
   );

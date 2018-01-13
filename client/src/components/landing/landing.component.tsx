@@ -22,35 +22,39 @@ type LandingProps =
   & PropsFromState
   & PropsFromDispatch;
 
-const loginForm = (isLoading: boolean) => () => {
-  return (
-    <div>
-      <LoginFormComponent disabled={isLoading} />
-      <ButtonLink
-        to="/signup"
-        className="btn-primary btn-block my-3"
-        disabled={isLoading}
-      >
-        Sign Up
-      </ButtonLink>
-    </div>
-  );
-};
+function renderLoginForm(isLoading: boolean) {
+  return () => {
+    return (
+      <div>
+        <LoginFormComponent disabled={isLoading} />
+        <ButtonLink
+          to="/signup"
+          className="btn-primary btn-block my-3"
+          disabled={isLoading}
+        >
+          Sign Up
+        </ButtonLink>
+      </div>
+    );
+  };
+}
 
-const signupForm = (isLoading: boolean) => () => {
-  return (
-    <div>
-      <SignupFormComponent disabled={isLoading} />
-      <ButtonLink
-        to="/login"
-        className="btn-primary btn-block my-3"
-        disabled={isLoading}
-      >
-        Back to Log In
-      </ButtonLink>
-    </div>
-  );
-};
+function renderSignupForm(isLoading: boolean) {
+  return () => {
+    return (
+      <div>
+        <SignupFormComponent disabled={isLoading} />
+        <ButtonLink
+          to="/login"
+          className="btn-primary btn-block my-3"
+          disabled={isLoading}
+        >
+          Back to Log In
+        </ButtonLink>
+      </div>
+    );
+  };
+}
 
 const LandingComponent: React.SFC<LandingProps> = ({isLoading}) => {
   return (
@@ -59,11 +63,11 @@ const LandingComponent: React.SFC<LandingProps> = ({isLoading}) => {
         <h1 className="text-left mb-4">Bulletin</h1>
         <Route
           path="/login"
-          render={loginForm(isLoading)}
+          render={renderLoginForm(isLoading)}
         />
         <Route
           path="/signup"
-          render={signupForm(isLoading)}
+          render={renderSignupForm(isLoading)}
         />
       </div>
     </div>

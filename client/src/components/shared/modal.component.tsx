@@ -52,7 +52,7 @@ class ModalComponent extends React.Component<ModalProps, {}> {
         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      )
+      );
     }
     return null;
   }
