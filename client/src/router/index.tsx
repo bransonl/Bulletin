@@ -33,6 +33,11 @@ const routes: RouteInfo[] = [
     authRequirement: AuthRequirement.Unauthenticated,
   },
   {
+    path: "/boards",
+    component: BoardsComponent,
+    authRequirement: AuthRequirement.Authenticated,
+  },
+  {
     path: "/",
     exact: true,
     component: HomeComponent,
