@@ -70,7 +70,7 @@ const SignupFormComponent: React.SFC<SignupFormProps> = (props) => {
         Sign Up
       </button>
     </form>
-  )
+  );
 };
 
 function validate(fields: SignupFormFields): SignupFormErrors {
@@ -93,7 +93,7 @@ function validate(fields: SignupFormFields): SignupFormErrors {
 
 export default connect<null, PropsFromDispatch, OwnProps>(
   null,
-  {clearError, signupRequest}
+  {clearError, signupRequest},
 )(reduxForm<SignupFormFields>({
   form: "SignupForm",
   validate,

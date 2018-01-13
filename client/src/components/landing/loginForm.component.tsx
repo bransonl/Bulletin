@@ -87,7 +87,7 @@ export {LoginFormError, LoginFormFields, LoginFormErrors};
 
 export default connect<null, PropsFromDispatch, OwnProps>(
   null,
-  {clearError, loginRequest}
+  {clearError, loginRequest},
 )(reduxForm<LoginFormFields>({
   form: "LoginForm",
   validate,
