@@ -1,6 +1,7 @@
 from bulletin import app
 from bulletin.decorators import auth, validation
 from bulletin.libs.bullet import build_bullet_tree
+from bulletin.libs.common import filter_valid
 from bulletin.models.board import Board
 from bulletin.models.membership import Membership, RoleType
 from bulletin.schemas.base import BaseSchema
@@ -12,7 +13,7 @@ from bulletin.schemas.board import BoardSchema, CreateBoardSchema, \
 @auth.requires_authentication()
 def get_boards(user):
     return BoardSchema(wrap=True).to_json(
-        list(map(lambda membership: membership.board, user.boards)), many=True)
+        [membership.board for membership in user.boards], many=True)
 
 
 @app.route('/boards/<int:board_id>', methods=['GET'])
@@ -20,8 +21,7 @@ def get_boards(user):
 @validation.pass_board_by_id()
 @auth.requires_board_access()
 def get_board(board):
-    bullets = list(filter(lambda bullet: bullet.valid is True,
-                          board.bullets))
+    bullets = filter_valid(board.bullets)
     board.bullets = build_bullet_tree(bullets)
     return BoardSchema(wrap=True).to_json(board)
 
@@ -46,8 +46,7 @@ def modify_board(board, data):
     board.update(name=data.get('name'),
                  description=data.get('description'),
                  privacy=data.get('privacy'))
-    bullets = build_bullet_tree(
-        filter(lambda bullet: bullet.valid is True, board.bullets))
+    bullets = build_bullet_tree(filter_valid(board.bullets))
     return BoardSchema(wrap=True).to_json({
         'id': board.id,
         'name': board.name,
