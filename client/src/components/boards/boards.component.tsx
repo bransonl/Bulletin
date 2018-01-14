@@ -4,6 +4,7 @@ import {Route, RouteComponentProps} from "react-router-dom";
 
 import {clearUser, UserAction} from "../../state/actions/user.action";
 import HeaderComponent from "../shared/header.component";
+import BoardSettingsComponent from "./boardSettings.component";
 
 interface PropsFromDispatch {
   clearUser: () => UserAction;
@@ -15,6 +16,7 @@ const BoardsComponent: React.SFC<BoardsProps> = ({clearUser: logout, match}) => 
   return (
     <div>
       <HeaderComponent logout={logout} />
+      <Route path={`${match.url}/create`} component={BoardSettingsComponent} />
     </div>
   );
 };
