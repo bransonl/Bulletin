@@ -7,8 +7,10 @@ database/
 # pyc files
 **/*.py[cod]
 
-# env file
+# env files
 .env
+**/env
 
-# intellij
+# IDE directories
 .idea
+.vscode
