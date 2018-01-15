@@ -1,6 +1,10 @@
-import enum
+from enum import Enum
 
 
-class BulletType(enum.Enum):
+# pylint: disable=too-few-public-methods
+
+class BulletType(Enum):
     group = 'group'
     bullet = 'bullet'
+
+# pylint: enable=too-few-public-methods
