@@ -11,11 +11,8 @@ CONFIGS = {
 
 
 def build_configs():
-    return [{
-        'config_type': name,
-        'data': value_func()
-    } for name, value_func in CONFIGS.items()]
+    return {'config': {name: func() for name, func in CONFIGS.items()}}
 
 
 def build_single_config(name):
-    return {'config_type': name, 'data': CONFIGS[name]()}
+    return {'config': {name: CONFIGS[name]()}}

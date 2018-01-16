@@ -1,8 +1,8 @@
-from marshmallow import fields, Schema
+from marshmallow import fields
 
 from bulletin.schemas.base import BaseSchema
 
 
-class ConfigItemSchema(BaseSchema):
-    config_type = fields.Str(required=True, dump_to='configType')
-    data = fields.Dict(required=True)
+class ConfigSchema(BaseSchema):
+    config = fields.Dict(keys=fields.Str(required=True),
+                         data=fields.Dict(required=True))
