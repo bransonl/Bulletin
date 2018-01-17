@@ -1,7 +1,7 @@
 import {UserAction, UserActionType} from "../actions/user.action";
 import {UserCredentials, UserToken} from "../../types/user";
 
-type UserState = UserCredentials | UserToken | null;
+type UserState = UserToken;
 
 const user = (state: UserState = null, action: UserAction): UserState => {
   switch (action.type) {
