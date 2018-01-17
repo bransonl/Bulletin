@@ -10,12 +10,13 @@ import {identifyUser, UserAction, UserActionType} from "../actions/user.action";
 import {
   ErrorAction, formRequestRejected, requestRejected,
 } from "../actions/error.action";
-import {nullAction} from "../actions/null.action";
+import {nullAction, NullAction} from "../actions/null.action";
 import {
   hideLoading, LoadingAction, showLoading,
 } from "../actions/loading.action";
 
-const clearUserEpic = (action$: ActionsObservable<UserAction>) => (
+const clearUserEpic = (action$: ActionsObservable<UserAction>):
+  Observable<NullAction> => (
   action$
     .ofType(UserActionType.CLEAR_USER)
     .do(() => localStorage.setItem("user", null))
@@ -23,10 +24,11 @@ const clearUserEpic = (action$: ActionsObservable<UserAction>) => (
     .mapTo(nullAction())
 );
 
-const identifyUserEpic = (action$: ActionsObservable<UserAction>) => (
+const identifyUserEpic = (action$: ActionsObservable<UserAction>):
+  Observable<NullAction> => (
   action$
     .ofType(UserActionType.IDENTIFY_USER)
-    .do((action: UserAction) => localStorage.setItem("user", action.payload))
+    .do((action) => localStorage.setItem("user", action.payload))
     .do(() => store.dispatch(push("/")))
     .mapTo(nullAction())
 );
@@ -35,7 +37,7 @@ const loginEpic = (action$: ActionsObservable<UserAction>):
   Observable<UserAction | ErrorAction | LoadingAction> => (
     action$
       .ofType(UserActionType.LOGIN_REQUEST)
-      .mergeMap((action: UserAction) => {
+    .mergeMap((action) => {
         const url = `${env.endpoint}/login`;
         return Observable.of(
           Observable.of(showLoading()),
@@ -67,7 +69,7 @@ const signupEpic = (action$: ActionsObservable<UserAction>):
   Observable<UserAction | ErrorAction | LoadingAction> => (
     action$
       .ofType(UserActionType.SIGNUP_REQUEST)
-      .mergeMap((action: UserAction) => {
+    .mergeMap((action) => {
         const url = `${env.endpoint}/signup`;
         return Observable.of(
           Observable.of(showLoading()),
