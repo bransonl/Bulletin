@@ -1,3 +1,5 @@
+import {Action} from "redux";
+
 import {Error, FieldError} from "../../types/error";
 
 const enum ErrorActionType {
@@ -6,7 +8,7 @@ const enum ErrorActionType {
   FORM_REQUEST_REJECTED = "form_request_rejected",
 }
 
-interface ErrorAction {
+interface ErrorAction extends Action {
   type: ErrorActionType;
   payload?: Error | FieldError | null;
 }

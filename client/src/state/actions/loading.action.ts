@@ -1,9 +1,11 @@
+import {Action} from "redux";
+
 const enum LoadingActionType {
   SHOW_LOADING = "show_loading",
   HIDE_LOADING = "hide_loading",
 }
 
-interface LoadingAction {
+interface LoadingAction extends Action {
   type: LoadingActionType;
 }
 

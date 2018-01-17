@@ -1,4 +1,6 @@
-interface NullAction {
+import {Action} from "redux";
+
+interface NullAction extends Action {
   type: null;
 }
 

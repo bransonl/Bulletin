@@ -1,3 +1,5 @@
+import {Action} from "redux";
+
 import {UserCredentials, UserToken} from "../../types/user";
 
 const enum UserActionType {
@@ -7,7 +9,7 @@ const enum UserActionType {
   IDENTIFY_USER = "identify_user",
 }
 
-interface UserAction {
+interface UserAction extends Action {
   type: UserActionType;
   payload?: UserCredentials | UserToken;
 }
