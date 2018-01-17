@@ -4,16 +4,18 @@ import {FormState} from "redux-form";
 
 import rootReducer from "./reducers";
 import middleware from "./middlewares";
+import localStorage from "./localStorage";
 import {ErrorState} from "./reducers/error.reducer";
 import {UserState} from "./reducers/user.reducer";
-import localStorage from "./localStorage";
 import {LoadingState} from "./reducers/loading.reducer";
+import {ConfigState} from "./reducers/config.reducer";
 
 interface RootState {
   router: RouterState;
   form: FormState;
   error: ErrorState;
   user: UserState;
+  config: ConfigState;
   isLoading: LoadingState;
 }
 
@@ -22,6 +24,7 @@ const persistedState: RootState = {
   form: undefined,
   error: undefined,
   user: localStorage.getItem("user"),
+  config: undefined,
   isLoading: undefined,
 };
 
