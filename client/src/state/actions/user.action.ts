@@ -16,7 +16,7 @@ const clearUser = (): UserAction => ({
   type: UserActionType.CLEAR_USER,
 });
 
-const identifyUser = (payload: any): UserAction => ({
+const identifyUser = (payload: UserToken): UserAction => ({
   type: UserActionType.IDENTIFY_USER,
   payload,
 });
