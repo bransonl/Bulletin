@@ -50,14 +50,14 @@ const LoginFormComponent: React.SFC<LoginFormProps> = (props) => {
       <LabeledField
         type="text"
         name="username"
-        placeholder="Username"
-        props={{label: "Username", disabled: props.disabled}}
+        label="Username"
+        disabled={props.disabled}
       />
       <LabeledField
         type="password"
         name="password"
-        placeholder="Password"
-        props={{label: "Password", disabled: props.disabled}}
+        label="Password"
+        disabled={props.disabled}
       />
       <button
         type="submit"
