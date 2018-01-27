@@ -4,8 +4,17 @@ from enum import Enum
 # pylint: disable=too-few-public-methods
 
 class PrivacyType(Enum):
-    private = 'private'
-    secret = 'secret'
-    public = 'public'
+    private = {
+        'label': 'Private',
+        'value': 'private',
+    }
+    secret = {
+        'label': 'Secret',
+        'value': 'secret',
+    }
+    public = {
+        'label': 'Public',
+        'value': 'secret',
+    }
 
 # pylint: enable=too-few-public-methods
