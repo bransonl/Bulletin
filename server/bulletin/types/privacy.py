@@ -14,7 +14,7 @@ class PrivacyType(Enum):
     }
     public = {
         'label': 'Public',
-        'value': 'secret',
+        'value': 'public',
     }
 
 # pylint: enable=too-few-public-methods
