@@ -7,6 +7,7 @@ interface LabeledFieldProps extends WrappedFieldProps {
   disabled?: boolean;
   label?: string;
   description?: string;
+  component?: React.ComponentType<any>;
   type?: string;
   placeholder?: string;
 }
@@ -17,6 +18,25 @@ function renderLabel(field: LabeledFieldProps) {
     return <label id={`${field.input.name}-label`}>{field.label}</label>;
   }
   return null;
+}
+
+// Render the component of the field or text input if not provided
+function renderComponent(field: LabeledFieldProps) {
+  if (field.component) {
+    const C = field.component;
+    return <C {...field.input} />;
+  }
+  return (
+    <input
+      type={field.type}
+      className="form-control"
+      placeholder={field.placeholder}
+      disabled={field.disabled}
+      aria-labelledby={field.label ? `${field.input.name}-label` : ""}
+      aria-describedby={field.description ? `${field.input.name}-hint` : ""}
+      {...field.input}
+    />
+  );
 }
 
 // Render the description of the field if prop field is provided
@@ -48,15 +68,7 @@ const FieldComponent: React.SFC<LabeledFieldProps> = (field) => {
   return (
     <div className={className}>
       {renderLabel(field)}
-      <input
-        type={field.type}
-        className="form-control"
-        placeholder={field.placeholder}
-        disabled={field.disabled}
-        aria-labelledby={field.label ? `${field.input.name}-label` : ""}
-        aria-describedby={field.description ? `${field.input.name}-hint` : ""}
-        {...field.input}
-      />
+      {renderComponent(field)}
       {renderDescription(field)}
       {renderError(field)}
     </div>
@@ -67,6 +79,7 @@ const FieldComponent: React.SFC<LabeledFieldProps> = (field) => {
 const LabeledField: React.SFC<any> = (props) => (
   <Field
     {...props}
+    props={props}
     component={FieldComponent}
   />
 );
