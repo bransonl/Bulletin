@@ -56,13 +56,13 @@ const config: webpack.Configuration = {
           {
             loader: "postcss-loader",
             options: {
-              plugins: function() {
+              plugins: () => {
                 return [
                   require("precss"),
-                  require("autoprefixer")
+                  require("autoprefixer"),
                 ];
-              }
-            }
+              },
+            },
           },
           "sass-loader",
         ],
