@@ -28,13 +28,13 @@ function renderComponent(field: LabeledFieldProps) {
   }
   return (
     <input
+      {...field.input}
       type={field.type}
       className="form-control"
       placeholder={field.placeholder}
       disabled={field.disabled}
       aria-labelledby={field.label ? `${field.input.name}-label` : ""}
       aria-describedby={field.description ? `${field.input.name}-hint` : ""}
-      {...field.input}
     />
   );
 }

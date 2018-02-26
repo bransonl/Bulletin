@@ -1,5 +1,5 @@
 interface PrivacyValuesConfig {
-  values: string[];
+  values: {label: string, value: string}[];
 }
 
 type ConfigItem = PrivacyValuesConfig;
