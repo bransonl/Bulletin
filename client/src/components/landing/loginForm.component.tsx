@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {InjectedFormProps, reduxForm} from "redux-form";
 
 import ErrorMessage from "../shared/error/errorMessage.component";
-import {loginRequest, UserAction} from "../../state/actions/user.action";
+import {loginRequest, UserAction} from "../../state/user/user.action";
 import LabeledField from "../shared/labeledField.component";
-import {clearError, ErrorAction} from "../../state/actions/error.action";
+import {clearError, ErrorAction} from "../../state/error/error.action";
 
 const enum LoginFormError {
   MISSING_USERNAME = "Please enter your username.",

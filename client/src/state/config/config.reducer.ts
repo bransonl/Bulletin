@@ -1,4 +1,4 @@
-import {ConfigAction, ConfigActionType} from "../actions/config.action";
+import {ConfigAction, ConfigActionType} from "./config.action";
 import {Config, ConfigItem} from "../../types/config";
 
 type ConfigState = Config;

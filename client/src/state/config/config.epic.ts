@@ -7,14 +7,14 @@ import store from "../index";
 import {
   ConfigAction, ConfigActionType,
   saveConfigs, saveSingleConfig,
-} from "../actions/config.action";
+} from "./config.action";
 import {
   ErrorAction, requestRejected,
-} from "../actions/error.action";
-import {nullAction} from "../actions/null.action";
+} from "../error/error.action";
+import {nullAction} from "../null/null.action";
 import {
   hideLoading, LoadingAction, showLoading,
-} from "../actions/loading.action";
+} from "../loading/loading.action";
 
 const fetchConfigsEpic = (action$: ActionsObservable<ConfigAction>):
   Observable<ConfigAction | ErrorAction | LoadingAction> => (

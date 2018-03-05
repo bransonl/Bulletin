@@ -3,13 +3,14 @@ import {connect} from "react-redux";
 import {Link} from "react-router-dom";
 import {InjectedFormProps, reduxForm} from "redux-form";
 
-import {clearError, ErrorAction} from "../../state/actions/error.action";
+import {clearError, ErrorAction} from "../../state/error/error.action";
 import {Config, PrivacyValuesConfig} from "../../types/config";
 import {
   ConfigAction, fetchSingleConfig,
-} from "../../state/actions/config.action";
+} from "../../state/config/config.action";
 import LabeledField from "../shared/labeledField.component";
 import { StringSelect } from "../shared/select.component";
+import ErrorMessage from "../shared/error/errorMessage.component";
 
 import "./boardSettings.component.scss";
 
@@ -84,7 +85,6 @@ class BoardSettingsComponent extends React.Component<BoardSettingsProps, {}> {
             label="Privacy Level"
             description="Privacy setting for the board"
             component={this.renderPrivacySelect}
-            value={privacyValue}
           />
           <button type="submit" className="btn btn-primary">Save</button>
         </form>

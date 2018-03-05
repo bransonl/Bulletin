@@ -4,8 +4,8 @@ import {reduxForm, InjectedFormProps} from "redux-form";
 
 import LabeledField from "../shared/labeledField.component";
 import {LoginFormError, LoginFormErrors, LoginFormFields} from "./loginForm.component";
-import {signupRequest, UserAction} from "../../state/actions/user.action";
-import {clearError, ErrorAction} from "../../state/actions/error.action";
+import {signupRequest, UserAction} from "../../state/user/user.action";
+import {clearError, ErrorAction} from "../../state/error/error.action";
 
 const SignupFormError = {
   MISSING_CONFIRM_PASSWORD: "Please confirm your password.",

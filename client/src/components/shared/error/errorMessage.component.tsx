@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 
 import {Error} from "../../../types/error";
-import {clearError, ErrorAction} from "../../../state/actions/error.action";
+import {clearError, ErrorAction} from "../../../state/error/error.action";
 
 interface PropsFromState {
   error: Error;

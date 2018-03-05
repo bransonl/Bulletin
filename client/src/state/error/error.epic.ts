@@ -3,8 +3,8 @@ import {push} from "react-router-redux";
 import {Observable} from "rxjs/Rx";
 
 import store from "../index";
-import {ErrorAction, ErrorActionType} from "../actions/error.action";
-import {clearUser, UserAction} from "../actions/user.action";
+import {ErrorAction, ErrorActionType} from "./error.action";
+import {clearUser, UserAction} from "../user/user.action";
 
 const requestRejectedEpic = (action$: ActionsObservable<ErrorAction>):
   Observable<UserAction> => (

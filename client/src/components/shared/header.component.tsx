@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 import {MdDashboard, MdSettings} from "react-icons/lib/md";
 
-import {UserAction} from "../../state/actions/user.action";
+import {UserAction} from "../../state/user/user.action";
 
 interface HeaderProps {
   logout: () => UserAction;

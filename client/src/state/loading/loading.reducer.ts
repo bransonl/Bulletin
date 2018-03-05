@@ -1,4 +1,4 @@
-import {LoadingAction, LoadingActionType} from "../actions/loading.action";
+import {LoadingAction, LoadingActionType} from "./loading.action";
 
 type LoadingState = boolean;
 

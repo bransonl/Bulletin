@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Route, RouteComponentProps} from "react-router-dom";
 
-import {clearError, ErrorAction} from "../../state/actions/error.action";
+import {clearError, ErrorAction} from "../../state/error/error.action";
 import LoginFormComponent from "./loginForm.component";
 import SignupFormComponent from "./signupForm.component";
 import ButtonLink from "../shared/buttonLink.component";

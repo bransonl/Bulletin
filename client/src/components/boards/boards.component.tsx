@@ -2,7 +2,7 @@ import * as React from "react";
 import {connect} from "react-redux";
 import {Route, RouteComponentProps} from "react-router-dom";
 
-import {clearUser, UserAction} from "../../state/actions/user.action";
+import {clearUser, UserAction} from "../../state/user/user.action";
 import HeaderComponent from "../shared/header.component";
 import BoardSettingsComponent from "./boardSettings.component";
 

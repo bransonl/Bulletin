@@ -2,13 +2,13 @@ import {createStore, Store} from "redux";
 import {RouterState} from "react-router-redux";
 import {FormState} from "redux-form";
 
-import rootReducer from "./reducers";
-import middleware from "./middlewares";
+import rootReducer from "./reducer";
+import middleware from "./middleware";
 import localStorage from "./localStorage";
-import {ErrorState} from "./reducers/error.reducer";
-import {UserState} from "./reducers/user.reducer";
-import {LoadingState} from "./reducers/loading.reducer";
-import {ConfigState} from "./reducers/config.reducer";
+import {ErrorState} from "./error/error.reducer";
+import {UserState} from "./user/user.reducer";
+import {LoadingState} from "./loading/loading.reducer";
+import {ConfigState} from "./config/config.reducer";
 
 interface RootState {
   router: RouterState;

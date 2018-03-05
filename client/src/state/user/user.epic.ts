@@ -6,14 +6,14 @@ import {Observable} from "rxjs/Rx";
 import env from "../../env/env";
 import store from "../index";
 import localStorage from "../localStorage";
-import {identifyUser, UserAction, UserActionType} from "../actions/user.action";
+import {identifyUser, UserAction, UserActionType} from "./user.action";
 import {
   ErrorAction, formRequestRejected, requestRejected,
-} from "../actions/error.action";
-import {nullAction, NullAction} from "../actions/null.action";
+} from "../error/error.action";
+import {nullAction, NullAction} from "../null/null.action";
 import {
   hideLoading, LoadingAction, showLoading,
-} from "../actions/loading.action";
+} from "../loading/loading.action";
 
 const clearUserEpic = (action$: ActionsObservable<UserAction>):
   Observable<NullAction> => (
