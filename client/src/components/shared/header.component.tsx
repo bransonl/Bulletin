@@ -10,7 +10,7 @@ interface HeaderProps {
 }
 
 const HeaderComponent: React.SFC<HeaderProps> = (props) => (
-  <nav className="navbar navbar-expand-lg navbar-light bg-light">
+  <nav className="navbar navbar-expand-sm navbar-light bg-light">
     <Link className="navbar-brand" to="/">Bulletin</Link>
     <ul className="navbar-nav justify-content-end ml-auto">
       <div className="dropdown">
@@ -32,7 +32,7 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
           <Link className="dropdown-item" to="/boards">Manage boards</Link>
         </div>
       </div>
-      <div className="dropdown show">
+      <div className="dropdown">
         <button
           type="button"
           className="btn btn-light"
