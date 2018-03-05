@@ -17,6 +17,7 @@ class Select<T> extends React.Component<SelectProps<T>> {
     const {options, ...rest} = this.props;
     return (
       <select {...rest}>
+        <option value={""}>Select an option...</option>
         {options && renderOptions(options)}
       </select>
     );
