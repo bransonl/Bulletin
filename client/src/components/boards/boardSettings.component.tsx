@@ -59,34 +59,41 @@ class BoardSettingsComponent extends React.Component<BoardSettingsProps, {}> {
   }
 
   public render() {
-    if (this.props.isLoading) {
+    const {handleSubmit, isLoading, pristine, privacyValues} = this.props;
+    if (isLoading) {
       return <div>Loading...</div>;
     }
-    const privacyOptions = this.props.privacyValues && this.props.privacyValues.values;
+    const privacyOptions = privacyValues && privacyValues.values;
     const privacyValue = privacyOptions && privacyOptions[1].value;
     return (
       <div className="container">
         <h1 className="page-title">Create Board</h1>
-        <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
+        <form onSubmit={handleSubmit(this.onSubmit)}>
           <LabeledField
             type="text"
-            name="board-name"
+            name="name"
             label="Name"
             description="Name to identify the board"
           />
           <LabeledField
             type="text"
-            name="board-description"
+            name="description"
             label="Description"
             description="Short description of the board"
           />
           <LabeledField
-            name="board-privacy"
+            name="privacy"
             label="Privacy Level"
             description="Privacy setting for the board"
             component={this.renderPrivacySelect}
           />
-          <button type="submit" className="btn btn-primary">Save</button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={pristine}
+          >
+            Save
+          </button>
         </form>
       </div>
     );
