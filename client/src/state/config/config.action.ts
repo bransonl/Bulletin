@@ -29,7 +29,8 @@ const fetchSingleConfig = (configName: string): ConfigAction => ({
   payload: configName,
 });
 
-const saveSingleConfig = (configName: string, payload: ConfigItem): ConfigAction => ({
+const saveSingleConfig = (configName: string, payload: ConfigItem):
+ConfigAction => ({
   type: ConfigActionType.SAVE_SINGLE_CONFIG,
   configName,
   payload,

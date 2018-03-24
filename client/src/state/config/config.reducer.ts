@@ -3,7 +3,8 @@ import {Config, ConfigItem} from "../../types/config";
 
 type ConfigState = Config;
 
-const config = (state: ConfigState = null, action: ConfigAction): ConfigState => {
+const config = (state: ConfigState = null, action: ConfigAction):
+ConfigState => {
   switch (action.type) {
     case ConfigActionType.SAVE_CONFIGS:
       return action.payload as Config;

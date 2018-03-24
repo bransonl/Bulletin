@@ -9,7 +9,8 @@ const defaultError: ErrorState = {
   errors: {},
 };
 
-const error = (state: ErrorState = defaultError, action: ErrorAction): ErrorState => {
+const error = (state: ErrorState = defaultError, action: ErrorAction):
+ErrorState => {
   switch (action.type) {
     case ErrorActionType.CLEAR_ERROR:
       return defaultError;

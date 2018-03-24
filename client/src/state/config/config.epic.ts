@@ -17,67 +17,67 @@ import {
 } from "../loading/loading.action";
 
 const fetchConfigsEpic = (action$: ActionsObservable<ConfigAction>):
-  Observable<ConfigAction | ErrorAction | LoadingAction> => (
-    action$
-      .ofType(ConfigActionType.FETCH_CONFIGS)
-      .mergeMap((action) => {
-        const url = `${env.endpoint}/configs`;
-        return Observable.of(
-          Observable.of(showLoading()),
-          ajax({
-            url,
-            method: "GET",
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-            },
-          })
-            .mergeMap((res) =>
-              Observable.from([
-                saveConfigs(res.xhr.response.data),
-                hideLoading(),
-              ]))
-            .catch((err) =>
-              Observable.from([
-                requestRejected(err.xhr.response),
-                hideLoading(),
-              ])),
-        )
-          .mergeAll();
+Observable<ConfigAction | ErrorAction | LoadingAction> => (
+  action$
+  .ofType(ConfigActionType.FETCH_CONFIGS)
+  .mergeMap((action) => {
+    const url = `${env.endpoint}/configs`;
+    return Observable.of(
+      Observable.of(showLoading()),
+      ajax({
+        url,
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
       })
-  );
+      .mergeMap((res) =>
+      Observable.from([
+        saveConfigs(res.xhr.response.data),
+        hideLoading(),
+      ]))
+      .catch((err) =>
+      Observable.from([
+        requestRejected(err.xhr.response),
+        hideLoading(),
+      ])),
+    )
+    .mergeAll();
+  })
+);
 
 const fetchSingleConfig = (action$: ActionsObservable<ConfigAction>):
-  Observable<ConfigAction | ErrorAction | LoadingAction> => (
-    action$
-      .ofType(ConfigActionType.FETCH_SINGLE_CONFIG)
-      .mergeMap((action) => {
-        const configName: string = action.payload as string;
-        const url = `${env.endpoint}/configs/${configName}`;
-        return Observable.of(
-          Observable.of(showLoading()),
-          ajax({
-            url,
-            method: "GET",
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-            },
-          })
-            .mergeMap((res) =>
-              Observable.from([
-                saveSingleConfig(configName, res.xhr.response.data.config[configName]),
-                hideLoading(),
-              ]))
-            .catch((err) =>
-              Observable.from([
-                requestRejected(err.xhr.response),
-                hideLoading(),
-              ])),
-        )
-          .mergeAll();
+Observable<ConfigAction | ErrorAction | LoadingAction> => (
+  action$
+  .ofType(ConfigActionType.FETCH_SINGLE_CONFIG)
+  .mergeMap((action) => {
+    const configName: string = action.payload as string;
+    const url = `${env.endpoint}/configs/${configName}`;
+    return Observable.of(
+      Observable.of(showLoading()),
+      ajax({
+        url,
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
       })
-  );
+      .mergeMap((res) =>
+      Observable.from([
+        saveSingleConfig(configName, res.xhr.response.data.config[configName]),
+        hideLoading(),
+      ]))
+      .catch((err) =>
+      Observable.from([
+        requestRejected(err.xhr.response),
+        hideLoading(),
+      ])),
+    )
+    .mergeAll();
+  })
+);
 
 export default combineEpics(
   fetchConfigsEpic,
