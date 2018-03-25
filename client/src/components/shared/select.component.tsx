@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Options } from "../../types/select.d";
+import {Options} from "../../types/select";
 
 interface SelectProps<T> extends React.HTMLProps<HTMLSelectElement> {
   options: Options<T>;
