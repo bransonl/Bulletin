@@ -14,6 +14,7 @@ import {nullAction, NullAction} from "../null/null.action";
 import {
   hideLoading, LoadingAction, showLoading,
 } from "../loading/loading.action";
+import {baseHeaders} from "../headers";
 
 const clearUserEpic = (action$: ActionsObservable<UserAction>):
 Observable<NullAction> => (
@@ -45,21 +46,20 @@ Observable<UserAction | ErrorAction | LoadingAction> => (
         url,
         body: action.payload,
         method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
+        headers: baseHeaders,
       })
-      .mergeMap((res) =>
-      Observable.from([
-        identifyUser(res.xhr.response.data),
-        hideLoading(),
-      ]))
-      .catch((err) =>
-      Observable.from([
-        requestRejected(err.xhr.response),
-        hideLoading(),
-      ])),
+      .mergeMap((res) => (
+        Observable.from([
+          identifyUser(res.xhr.response.data),
+          hideLoading(),
+        ])
+      ))
+      .catch((err) => (
+        Observable.from([
+          requestRejected(err.xhr.response),
+          hideLoading(),
+        ])
+      )),
     )
     .mergeAll();
   })
@@ -77,21 +77,20 @@ Observable<UserAction | ErrorAction | LoadingAction> => (
         url,
         body: action.payload,
         method: "POST",
-        headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-        },
+        headers: baseHeaders,
       })
-      .mergeMap((res) =>
-      Observable.from([
-        identifyUser(res.xhr.response.data),
-        hideLoading(),
-      ]))
-      .catch((err) =>
-      Observable.from([
-        formRequestRejected(err.xhr.response),
-        hideLoading(),
-      ])),
+      .mergeMap((res) => (
+        Observable.from([
+          identifyUser(res.xhr.response.data),
+          hideLoading(),
+        ])
+      ))
+      .catch((err) => (
+        Observable.from([
+          formRequestRejected(err.xhr.response),
+          hideLoading(),
+        ])
+      )),
     )
     .mergeAll();
   })
