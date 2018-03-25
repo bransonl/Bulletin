@@ -16,6 +16,7 @@ ErrorState => {
       return defaultError;
     case ErrorActionType.REQUEST_REJECTED:
     case ErrorActionType.FORM_REQUEST_REJECTED:
+    case ErrorActionType.UNAUTHENTICATED:
       return action.payload;
     default:
       return state;

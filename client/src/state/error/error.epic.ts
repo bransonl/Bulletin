@@ -9,7 +9,10 @@ import {clearUser, UserAction} from "../user/user.action";
 const requestRejectedEpic = (action$: ActionsObservable<ErrorAction>):
 Observable<UserAction> => (
   action$
-  .ofType(ErrorActionType.REQUEST_REJECTED)
+  .ofType(
+    ErrorActionType.REQUEST_REJECTED,
+    ErrorActionType.UNAUTHENTICATED,
+  )
   .do(() => store.dispatch(push("/login")))
   .mapTo(clearUser())
 );

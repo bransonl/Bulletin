@@ -2,10 +2,16 @@ import {Action} from "redux";
 
 import {Error, FieldError} from "../../types/error";
 
+const unauthenticatedError = {
+  code: 401,
+  message: "Please log in and try again.",
+};
+
 const enum ErrorActionType {
   CLEAR_ERROR = "clear_error",
   REQUEST_REJECTED = "request_rejected",
   FORM_REQUEST_REJECTED = "form_request_rejected",
+  UNAUTHENTICATED = "unauthenticated",
 }
 
 interface ErrorAction extends Action {
@@ -34,7 +40,11 @@ const formRequestRejected = (payload: any): ErrorAction => ({
   },
 });
 
+const unauthenticated = (): ErrorAction => ({
+  type: ErrorActionType.UNAUTHENTICATED,
+});
+
 export {
   ErrorAction, ErrorActionType,
-  clearError, requestRejected, formRequestRejected,
+  clearError, requestRejected, formRequestRejected, unauthenticated,
 };
