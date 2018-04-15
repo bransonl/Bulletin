@@ -11,6 +11,7 @@ const authCheckMiddleware = (store: MiddlewareAPI<RootState>) => (
         if (state.user === null || !state.user.token) {
           return next(unauthenticated());
         }
+        return next(action);
       }
       return next(action);
     }
