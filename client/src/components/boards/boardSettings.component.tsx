@@ -8,9 +8,11 @@ import {Config, PrivacyValuesConfig} from "../../types/config";
 import {
   ConfigAction, fetchSingleConfig,
 } from "../../state/config/config.action";
+import {BoardAction, createBoard} from "../../state/board/board.action";
 import LabeledField from "../shared/labeledField.component";
-import { StringSelect } from "../shared/select.component";
+import {StringSelect} from "../shared/select.component";
 import ErrorMessage from "../shared/error/errorMessage.component";
+import {BoardInfo} from "../../types/board";
 
 import "./boardSettings.component.scss";
 
@@ -40,6 +42,7 @@ interface PropsFromState {
 interface PropsFromDispatch {
   clearError: () => ErrorAction;
   fetchSingleConfig: (configName: string) => ConfigAction;
+  createBoard: (boardInfo: BoardInfo) => BoardAction;
 }
 
 type BoardSettingsProps =
@@ -115,6 +118,7 @@ class BoardSettingsComponent extends React.Component<BoardSettingsProps, {}> {
 
   private onSubmit(values: BoardSettingsFields) {
     this.props.clearError();
+    this.props.createBoard(values);
   }
 }
 
@@ -140,7 +144,7 @@ function mapStateToProps({config, isLoading}: {config: Config, isLoading: boolea
 
 export default connect<PropsFromState, PropsFromDispatch>(
   mapStateToProps,
-  {clearError, fetchSingleConfig},
+  {clearError, fetchSingleConfig, createBoard},
 )(reduxForm<BoardSettingsFields>({
   form: "BoardSettingsForm",
   validate,
