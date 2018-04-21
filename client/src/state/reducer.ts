@@ -4,9 +4,10 @@ import {routerReducer} from "react-router-redux";
 
 import {RootState} from "./index";
 import error from "./error/error.reducer";
+import isLoading from "./loading/loading.reducer";
 import user from "./user/user.reducer";
 import config from "./config/config.reducer";
-import isLoading from "./loading/loading.reducer";
+import board from "./board/board.reducer";
 
 const rootReducer: Reducer<RootState> = combineReducers<RootState>({
   router: routerReducer,
@@ -15,6 +16,7 @@ const rootReducer: Reducer<RootState> = combineReducers<RootState>({
   isLoading,
   user,
   config,
+  board,
 });
 
 export default rootReducer;
