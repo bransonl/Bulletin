@@ -6,7 +6,9 @@ interface ButtonLinkProps extends LinkProps {
   disabled?: boolean;
 }
 
-const ButtonLinkComponent: React.SFC<ButtonLinkProps> = ({className = "", disabled = false, ...rest}) => {
+const ButtonLinkComponent: React.SFC<ButtonLinkProps> = (
+  {className = "", disabled = false, ...rest},
+) => {
   const buttonLinkClassName = `btn ${className} ${disabled ? "disabled" : ""}`;
   return <Link {...rest} className={buttonLinkClassName} />;
 };

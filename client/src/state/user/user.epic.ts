@@ -34,8 +34,9 @@ Observable<NullAction> => (
   .mapTo(nullAction())
 );
 
-const loginEpic = (action$: ActionsObservable<UserAction>):
-Observable<UserAction | ErrorAction | LoadingAction> => (
+const loginEpic = (
+  action$: ActionsObservable<UserAction>,
+): Observable<UserAction | ErrorAction | LoadingAction> => (
   action$
   .ofType(UserActionType.LOGIN_REQUEST)
   .mergeMap((action) => {
@@ -65,8 +66,9 @@ Observable<UserAction | ErrorAction | LoadingAction> => (
   })
 );
 
-const signupEpic = (action$: ActionsObservable<UserAction>):
-Observable<UserAction | ErrorAction | LoadingAction> => (
+const signupEpic = (
+  action$: ActionsObservable<UserAction>,
+): Observable<UserAction | ErrorAction | LoadingAction> => (
   action$
   .ofType(UserActionType.SIGNUP_REQUEST)
   .mergeMap((action) => {

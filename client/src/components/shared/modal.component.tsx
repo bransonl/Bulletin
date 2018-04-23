@@ -40,7 +40,9 @@ class ModalComponent extends React.Component<ModalProps, {}> {
 
   private renderTitle() {
     if ("title" in this.props) {
-      return <h5 className="modal-title" id="modal-label">{this.props.title}</h5>;
+      return (
+        <h5 className="modal-title" id="modal-label">{this.props.title}</h5>
+      );
     }
     return null;
   }
@@ -49,7 +51,12 @@ class ModalComponent extends React.Component<ModalProps, {}> {
     const {dismissible = true} = this.props;
     if (dismissible) {
       return (
-        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+        <button
+          type="button"
+          className="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       );

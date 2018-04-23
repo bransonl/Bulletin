@@ -10,9 +10,11 @@ interface ProtectedRouteProps extends RouteProps {
   component: React.ComponentType<any>;
 }
 
-function renderComponent(C: React.ComponentType<any>,
-                         authRequirement: AuthRequirement,
-                         isAuthenticated: boolean) {
+function renderComponent(
+  C: React.ComponentType<any>,
+  authRequirement: AuthRequirement,
+  isAuthenticated: boolean,
+) {
   return (componentProps: any) => {
     switch (authRequirement) {
       case AuthRequirement.None:

@@ -28,7 +28,9 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
           className="dropdown-menu dropdown-menu-right"
           aria-labelledby="board-dropdown-button"
         >
-          <Link className="dropdown-item" to="/boards/create">Create board</Link>
+          <Link className="dropdown-item" to="/boards/create">
+            Create board
+          </Link>
           <Link className="dropdown-item" to="/boards">Manage boards</Link>
         </div>
       </div>
@@ -48,7 +50,13 @@ const HeaderComponent: React.SFC<HeaderProps> = (props) => (
           aria-labelledby="settings-dropdown-button"
         >
           <a className="dropdown-item" href="javascript:void(0)">Account</a>
-          <a className="dropdown-item" href="javascript:void(0)" onClick={props.logout}>Log Out</a>
+          <a
+            className="dropdown-item"
+            href="javascript:void(0)"
+            onClick={props.logout}
+          >
+            Log Out
+          </a>
         </div>
       </div>
     </ul>

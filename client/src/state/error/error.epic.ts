@@ -6,8 +6,9 @@ import store from "../index";
 import {ErrorAction, ErrorActionType} from "./error.action";
 import {clearUser, UserAction} from "../user/user.action";
 
-const requestRejectedEpic = (action$: ActionsObservable<ErrorAction>):
-Observable<UserAction> => (
+const requestRejectedEpic = (
+  action$: ActionsObservable<ErrorAction>,
+): Observable<UserAction> => (
   action$
   .ofType(
     ErrorActionType.REQUEST_REJECTED,

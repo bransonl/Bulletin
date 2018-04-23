@@ -16,8 +16,9 @@ import {
   hideLoading, LoadingAction, showLoading,
 } from "../loading/loading.action";
 
-const fetchConfigsEpic = (action$: ActionsObservable<ConfigAction>):
-Observable<ConfigAction | ErrorAction | LoadingAction> => (
+const fetchConfigsEpic = (
+  action$: ActionsObservable<ConfigAction>,
+): Observable<ConfigAction | ErrorAction | LoadingAction> => (
   action$
   .ofType(ConfigActionType.FETCH_CONFIGS)
   .mergeMap((action) => {
@@ -47,8 +48,9 @@ Observable<ConfigAction | ErrorAction | LoadingAction> => (
   })
 );
 
-const fetchSingleConfig = (action$: ActionsObservable<ConfigAction>):
-Observable<ConfigAction | ErrorAction | LoadingAction> => (
+const fetchSingleConfig = (
+  action$: ActionsObservable<ConfigAction>,
+): Observable<ConfigAction | ErrorAction | LoadingAction> => (
   action$
   .ofType(ConfigActionType.FETCH_SINGLE_CONFIG)
   .mergeMap((action) => {
