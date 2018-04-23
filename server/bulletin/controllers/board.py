@@ -13,7 +13,7 @@ from bulletin.schemas.board import BoardSchema, CreateBoardSchema, \
 @auth.requires_authentication()
 def get_boards(user):
     return BoardSchema(wrap=True).to_json(
-        [membership.board for membership in user.boards], many=True)
+        [membership.board for membership in user.memberships], many=True)
 
 
 @app.route('/boards/<int:board_id>', methods=['GET'])
