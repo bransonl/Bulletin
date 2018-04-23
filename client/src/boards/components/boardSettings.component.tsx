@@ -15,8 +15,6 @@ import {StringSelect} from "../../shared/components/select.component";
 import ErrorMessage from "../../error/components/errorMessage.component";
 import {Board, BoardInfo} from "../types/board";
 
-import "./boardSettings.component.scss";
-
 const enum BoardSettingsError {
   MissingName = "Please enter a name for the board.",
   MissingDescription = "Please enter a description for the board.",
