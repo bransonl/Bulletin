@@ -11,8 +11,8 @@ import "bootstrap";
 import "bootstrap/scss/bootstrap.scss"; // Bootstrap styles
 import "./stylesheets/styles.scss"; // Global styles
 
-import Router from "./router";
-import store from "./state";
+import Router from "./router/components/router.component";
+import store from "./rootState";
 
 const rootElement = document.getElementById("root");
 
@@ -30,8 +30,8 @@ const render = () => {
 render();
 
 if (module.hot) {
-  module.hot.accept("./router", () => {
-    const NextRouter = require("./router").default;
+  module.hot.accept("./router/components/router.component", () => {
+    const NextRouter = require("./router/components/router.component").default;
     ReactDOM.render(
       <AppContainer>
         <Provider store={store}>
