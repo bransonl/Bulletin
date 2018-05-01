@@ -1,7 +1,7 @@
 from marshmallow import fields, Schema, ValidationError
 
 from bulletin.membership.membership_error import MembershipErrorMessage
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 from bulletin.auth.role_type import RoleType
 
 

@@ -4,7 +4,7 @@ from bulletin.shared import validation_decorator as validation
 from bulletin.membership.membership_error import NotMemberOfBoard, \
     InsufficientPrivileges, ExistingMembership
 from bulletin.membership.membership_model import Membership
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 from bulletin.board.board_schema import BoardSchema
 from bulletin.membership.membership_schema import MembershipSchema, \
     UpdateMembershipSchema

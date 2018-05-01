@@ -5,7 +5,7 @@ from bulletin.bullet.bullet_lib import build_bullet_tree
 from bulletin.shared.common_lib import filter_valid
 from bulletin.board.board_model import Board
 from bulletin.membership.membership_model import Membership, RoleType
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 from bulletin.board.board_schema import BoardSchema, CreateBoardSchema, \
     ModifyBoardSchema
 

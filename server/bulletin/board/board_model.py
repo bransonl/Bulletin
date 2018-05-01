@@ -1,24 +1,19 @@
 from sqlalchemy import orm
 
 from bulletin import db
+from bulletin.base.base_model import Base
 from bulletin.auth.privacy_type import PrivacyType
 from bulletin.shared.common_lib import filter_valid
 from bulletin.bullet.bullet_lib import build_bullet_tree
 
 
-class Board(db.Model):
+class Board(Base):
     __tablename__ = 'board'
 
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)
     description = db.Column(db.Text, nullable=False, default='')
     privacy = db.Column(db.Enum(PrivacyType), nullable=False)
     valid = db.Column(db.Boolean, nullable=False, default=True)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False,
-                           server_default=db.func.now(),
-                           server_onupdate=db.func.now())
 
     member_roles = db.relationship('Membership',
                                    back_populates='board', lazy=True)

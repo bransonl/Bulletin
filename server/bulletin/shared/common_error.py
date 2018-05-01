@@ -1,4 +1,4 @@
-from bulletin.shared.base_error import BadRequest, ErrorMessage
+from bulletin.base.base_error import BadRequest, ErrorMessage
 
 
 class InvalidData(BadRequest):

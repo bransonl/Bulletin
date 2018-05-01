@@ -1,4 +1,4 @@
-from bulletin.shared.base_error import BadRequest, Forbidden
+from bulletin.base.base_error import BadRequest, Forbidden
 
 
 class MembershipErrorKey:

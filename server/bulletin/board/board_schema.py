@@ -2,7 +2,7 @@ from marshmallow import fields, Schema, ValidationError
 
 from bulletin.board.board_error import BoardErrorMessage, BoardRequirement
 from bulletin.board.board_model import PrivacyType
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 from bulletin.bullet.bullet_schema import BulletSchema
 
 

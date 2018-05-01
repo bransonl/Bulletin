@@ -2,7 +2,7 @@ from marshmallow import fields, ValidationError, Schema
 
 from bulletin.user.user_error import UserErrorMessage, UserRequirement
 from bulletin.user.user_model import User
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 
 
 def _validate_username(username):

@@ -3,7 +3,7 @@ from bulletin.auth import auth_decorator as auth
 from bulletin.shared import validation_decorator as validation
 from bulletin.bullet.bullet_model import Bullet
 from bulletin.membership.membership_model import RoleType
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 from bulletin.bullet.bullet_schema import BulletSchema, CreateBulletSchema, \
     ModifyBulletSchema
 

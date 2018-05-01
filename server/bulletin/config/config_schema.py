@@ -1,6 +1,6 @@
 from marshmallow import fields
 
-from bulletin.shared.base_schema import BaseSchema
+from bulletin.base.base_schema import BaseSchema
 
 
 class ConfigSchema(BaseSchema):

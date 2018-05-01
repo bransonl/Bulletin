@@ -3,7 +3,7 @@ from functools import wraps
 from flask import request
 
 from bulletin.shared import jwttoken_lib as jwttoken
-from bulletin.shared.base_error import Unauthorized
+from bulletin.base.base_error import Unauthorized
 from bulletin.board.board_error import BoardNotFound
 from bulletin.membership.membership_error import InsufficientPrivileges, NoBoardAccess
 from bulletin.board.board_model import PrivacyType

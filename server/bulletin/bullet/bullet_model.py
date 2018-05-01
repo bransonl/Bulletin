@@ -1,11 +1,11 @@
 from bulletin import db
+from bulletin.base.base_model import Base
 from bulletin.bullet.bullet_type import BulletType
 
 
-class Bullet(db.Model):
+class Bullet(Base):
     __tablename__ = 'bullet'
 
-    id = db.Column(db.Integer, primary_key=True)
     board_id = db.Column(db.Integer, db.ForeignKey('board.id'), nullable=False)
     parent_id = db.Column(db.Integer, nullable=True)
     root_id = db.Column(db.Integer, nullable=True)
@@ -15,11 +15,6 @@ class Bullet(db.Model):
     description = db.Column(db.Text, nullable=False, default='')
     value = db.Column(db.Integer, nullable=False)
     valid = db.Column(db.Boolean, nullable=False, default=True)
-    created_at = db.Column(db.DateTime, nullable=False,
-                           server_default=db.func.now())
-    updated_at = db.Column(db.DateTime, nullable=False,
-                           server_default=db.func.now(),
-                           server_onupdate=db.func.now())
 
     board = db.relationship('Board', back_populates='bullets', lazy=True)
 

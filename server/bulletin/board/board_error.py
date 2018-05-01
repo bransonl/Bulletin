@@ -1,4 +1,4 @@
-from bulletin.shared.base_error import NotFound, Resource, ResourceIdName
+from bulletin.base.base_error import NotFound, Resource, ResourceIdName
 
 
 class BoardRequirement:
