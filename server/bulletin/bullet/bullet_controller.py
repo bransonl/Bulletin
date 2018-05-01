@@ -12,7 +12,7 @@ from bulletin.bullet.bullet_schema import BulletSchema, CreateBulletSchema, \
 @auth.requires_authentication()
 @validation.pass_board_by_bullet_id()
 @auth.requires_board_access()
-def get_bullet(bullet):
+def get_bullet(bullet, board):
     return BulletSchema(wrap=True).to_json(bullet)
 
 

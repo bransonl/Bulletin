@@ -31,5 +31,5 @@ class BulletSchema(BaseSchema):
     label = fields.Str(required=True)
     description = fields.Str(required=True)
     value = fields.Int(required=True)
-    children = fields.Nested('self', many=True)
+    children = fields.Nested('self', many=True, exclude=('board', 'board_id'))
     updated_at = fields.DateTime(dump_to='updatedAt')

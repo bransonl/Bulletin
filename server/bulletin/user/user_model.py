@@ -12,6 +12,7 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False,
                            server_default=db.func.now(),
                            server_onupdate=db.func.now())
+
     memberships = db.relationship('Membership',
                                   back_populates='user', lazy=True)
 

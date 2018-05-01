@@ -34,4 +34,7 @@ class BoardSchema(BaseSchema):
     description = fields.Str()
     privacy = fields.Str(required=True)
     updated_at = fields.DateTime(dump_to='updatedAt')
-    bullets = fields.Nested(BulletSchema, many=True)
+    bullets = fields.Nested(BulletSchema,
+                            attribute='bullet_tree',
+                            exclude=('board', 'board_id'),
+                            many=True)

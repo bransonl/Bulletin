@@ -13,8 +13,8 @@ from bulletin.board.board_schema import BoardSchema, CreateBoardSchema, \
 @app.route('/boards', methods=['GET'])
 @auth.requires_authentication()
 def get_boards(user):
-    return BoardSchema(wrap=True).to_json(
-        [membership.board for membership in user.memberships], many=True)
+    boards = [membership.board for membership in user.memberships]
+    return BoardSchema(wrap=True).to_json(boards, many=True)
 
 
 @app.route('/boards/<int:board_id>', methods=['GET'])
@@ -22,8 +22,7 @@ def get_boards(user):
 @validation.pass_board_by_id()
 @auth.requires_board_access()
 def get_board(board):
-    bullets = filter_valid(board.bullets)
-    board.bullets = build_bullet_tree(bullets)
+    board.bullets = build_bullet_tree(filter_valid(board.bullets))
     return BoardSchema(wrap=True).to_json(board)
 
 
