@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import {AppContainer} from "react-hot-loader";
+import {hot} from "react-hot-loader";
 import {Provider} from "react-redux";
 import "rxjs";
 
@@ -16,28 +16,12 @@ import store from "./rootState";
 
 const rootElement = document.getElementById("root");
 
-const render = () => {
-  ReactDOM.render(
-    <AppContainer>
-      <Provider store={store}>
-        <Router />
-      </Provider>
-    </AppContainer>,
-    rootElement,
-  );
-};
+const App = () => (
+  <Provider store={store}>
+    <Router />
+  </Provider>
+);
 
-render();
+const HotApp = hot(module)(App);
 
-if (module.hot) {
-  module.hot.accept("./router/components/router.component", () => {
-    const NextRouter = require("./router/components/router.component").default;
-    ReactDOM.render(
-      <AppContainer>
-        <Provider store={store}>
-          <NextRouter />
-        </Provider>
-      </AppContainer>,
-      rootElement);
-  });
-}
+ReactDOM.render(<HotApp />, rootElement);

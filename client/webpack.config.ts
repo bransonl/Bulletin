@@ -11,7 +11,6 @@ import * as HtmlWebpackPlugin from "html-webpack-plugin";
 const config: webpack.Configuration = {
   entry: [
     "babel-polyfill",
-    "react-hot-loader/patch",
     "./src/index.tsx",
   ],
   output: {
@@ -29,7 +28,6 @@ const config: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         use: [
-          "react-hot-loader/webpack",
           "awesome-typescript-loader",
         ],
         include: path.resolve(__dirname, "src"),
